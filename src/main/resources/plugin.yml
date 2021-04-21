@@ -1,0 +1,3 @@
+name: BotDiscord
+version: ${project.version}
+main: me.willyan.bot.botdiscord.core.Main

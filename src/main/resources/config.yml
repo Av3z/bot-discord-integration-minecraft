@@ -1,0 +1,16 @@
+# V 1.0.2 Bot desenvolvido por Av3z#0694 para mais informações
+# Este bot foi desenvolvido exclusivamente para o servidor CookieMC
+# Este bot está sobe a licensa GNU para mais informações github.com/av3z/bot-cookie-mc
+
+# Segue abaixo as configurações do bot!
+bot:
+
+  # Aqui você escolhe o prefixo que vai querer exemplo : !say teste           / #say Olá isso é um teste
+  prefix: '!'
+
+  # > Coloque aqui a mensagem que ir aparecer como jogando
+  # > bote seu ip caso mude seu ip mude também aqui. não botar ip numérico por segurança ao seu servidor
+  playing: 'ip: jogar.cookiemc.cf'
+
+  #Mensagem de copyright do footer do embed
+  copyRight: '&copy CookieMC - Direitos Reservados'
