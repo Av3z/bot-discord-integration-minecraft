@@ -11,7 +11,7 @@ public class Embed {
         EmbedBuilder embed = new EmbedBuilder();
         embed.setTitle(title);
         embed.setDescription(desc);
-
+        embed.setColor(Color.ORANGE);
         embed.setFooter(ConfigManager.copyRight());
 
         return embed.build();
@@ -20,7 +20,7 @@ public class Embed {
     public static MessageEmbed create(String title, String desc, String field, String value){
         EmbedBuilder embed = new EmbedBuilder();
         embed.setTitle(title);
-        embed.setColor(Color.RED);
+        embed.setColor(Color.ORANGE);
         embed.setDescription(desc);
         embed.addField(field, value, false);
 

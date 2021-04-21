@@ -14,3 +14,12 @@ bot:
 
   #Mensagem de copyright do footer do embed
   copyRight: '&copy CookieMC - Direitos Reservados'
+
+  #Mensagem para usar corretamente o embed com 4 parametros
+  use: '> use **<prefix>embed-titulo-descrição completa-field-valor**'
+
+  #Mensagem para usar corretamente o embed com 2 parametros
+  orUse: '> ou **<prefix>embed-titulo-descrição completa**'
+
+  # A mensagem representa %msg% pode colocar > ** `` mas  se não tiver %msg% sua msg não irá sair.
+  say: '> **%msg%**'

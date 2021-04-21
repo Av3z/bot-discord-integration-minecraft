@@ -4,6 +4,11 @@ import me.willyan.bot.botdiscord.core.Main;
 
 public class ConfigManager {
 
+    public static String say(String msg){
+        String say = Main.getPlugin(Main.class).getConfig().getString("bot.say").replace("%msg%", msg);
+        return say;
+    }
+
     public static String prefix(){
         String prefix = Main.getPlugin(Main.class).getConfig().getString("bot.prefix");
         return prefix;
@@ -17,6 +22,26 @@ public class ConfigManager {
     public static String copyRight(){
         String copy = Main.getPlugin(Main.class).getConfig().getString("bot.copyRight");
         return copy;
+    }
+
+    public static String use(){
+        String use = Main.getPlugin(Main.class).getConfig().getString("bot.use");
+        return use;
+    }
+
+    public static String orUse(){
+        String orUse = Main.getPlugin(Main.class).getConfig().getString("bot.orUse");
+        return orUse;
+    }
+
+    public static String useReplaced(){
+        String use = Main.getPlugin(Main.class).getConfig().getString("bot.use").replace("<prefix>", prefix());
+        return use;
+    }
+
+    public static String orUseReplaced(){
+        String orUse = Main.getPlugin(Main.class).getConfig().getString("bot.orUse").replace("<prefix>", prefix());
+        return orUse;
     }
 
 }
