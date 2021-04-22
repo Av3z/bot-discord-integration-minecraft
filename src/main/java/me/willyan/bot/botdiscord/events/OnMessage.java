@@ -15,7 +15,6 @@ public class OnMessage extends ListenerAdapter {
         String[] args = e.getMessage().getContentRaw().split(" ");
         String[] arg = e.getMessage().getContentRaw().split("-");
         String author = e.getMessage().getAuthor().getAsMention();
-        int membros = e.getGuild().getMembers().size();
         boolean bot = e.getMessage().getAuthor().isBot();
         boolean adm = e.getMember().hasPermission(Permission.ADMINISTRATOR);
 
@@ -78,7 +77,7 @@ public class OnMessage extends ListenerAdapter {
 
             if (bot) return;
 
-            e.getChannel().sendMessage("> **[!say !embed !help]**").queue();
+            e.getChannel().sendMessage("> **[!say !embed !help !att !ip !loja !form !sugerir !clear !avatar]**").queue();
 
 
         }
@@ -124,7 +123,7 @@ public class OnMessage extends ListenerAdapter {
             Message.delete(e);
 
 
-            if(args.length >= 1){
+            if(args.length == 2){
 
                 if(args[1].equalsIgnoreCase( "mod") || args[1].equalsIgnoreCase("gc")){
                     Message.send(e, "> " + author);
@@ -143,11 +142,20 @@ public class OnMessage extends ListenerAdapter {
             Message.delete(e);
             if(bot) return;
             if(adm){
-                List<net.dv8tion.jda.api.entities.Message> messages = e.getChannel().getHistory().retrievePast(Integer.valueOf(args[1])).complete();
-                e.getChannel().deleteMessages(messages).queue();
-                Message.send(e, "> **Chat Limpo por:** " + author);
+                if(args.length == 2){
+                    List<net.dv8tion.jda.api.entities.Message> messages = e.getChannel().getHistory().retrievePast(Integer.valueOf(args[1])).complete();
+                    e.getChannel().deleteMessages(messages).queue();
+                    Message.send(e, "> **Chat Limpo por:** " + author);
+                }
+                else{
+                    Message.send(e, ConfigManager.getUseClear());
+                }
             }
 
+        }
+
+        if (args[0].equalsIgnoreCase(ConfigManager.prefix() + "ticket")){
+            Message.send(e, "> **Comando Ticket ainda está em desenvolvimento.** " + author);
         }
 
     }

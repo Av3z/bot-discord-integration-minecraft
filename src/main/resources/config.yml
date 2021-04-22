@@ -52,8 +52,11 @@ bot:
   # Coloque aqui o id do canal que quer que apareça as mensagens do /sugerir
   channelSugerir: '834804432125427732'
 
-  # Mensagem de use do comando !form
+  # Mensagem de use do comando form
   useForm: '> use !form <tipo>'
+
+  # Mensagem de use do comando clear
+  useClear: '> use !clear <quantidade>'
 
   command1:
     name: 'command1'

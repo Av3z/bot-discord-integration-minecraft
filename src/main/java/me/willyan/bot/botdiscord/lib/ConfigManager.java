@@ -99,5 +99,10 @@ public class ConfigManager {
         return form;
     }
 
+    public static String getUseClear(){
+        String clear = Main.getPlugin(Main.class).getConfig().getString("bot.useClear");
+        return clear;
+    }
+
 
 }
