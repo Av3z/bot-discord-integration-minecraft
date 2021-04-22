@@ -7,6 +7,19 @@ import java.awt.*;
 
 public class Embed {
 
+
+    public static MessageEmbed create(String title){
+        EmbedBuilder embed = new EmbedBuilder();
+        embed.setTitle(title);
+        embed.setAuthor("CookieMC");
+        embed.setThumbnail("https://i.pinimg.com/originals/b4/c6/0a/b4c60a5c4b34cd2e9b16bb25314e9a7e.png");
+        embed.setColor(Color.ORANGE);
+        embed.setFooter(ConfigManager.copyRight());
+
+        return embed.build();
+    }
+
+
     public static MessageEmbed create(String title, String desc){
         EmbedBuilder embed = new EmbedBuilder();
         embed.setTitle(title);

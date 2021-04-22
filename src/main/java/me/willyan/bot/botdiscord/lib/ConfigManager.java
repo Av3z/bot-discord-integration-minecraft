@@ -35,9 +35,19 @@ public class ConfigManager {
         return use;
     }
 
+    public static String useOne(){
+        String use = Main.getPlugin(Main.class).getConfig().getString("bot.useOne");
+        return use;
+    }
+
     public static String orUse(){
         String orUse = Main.getPlugin(Main.class).getConfig().getString("bot.orUse");
         return orUse;
+    }
+
+    public static String useOneReplaced(){
+        String useOne = Main.getPlugin(Main.class).getConfig().getString("bot.useOne").replace("<prefix>", prefix());
+        return useOne;
     }
 
     public static String useReplaced(){
@@ -48,6 +58,16 @@ public class ConfigManager {
     public static String orUseReplaced(){
         String orUse = Main.getPlugin(Main.class).getConfig().getString("bot.orUse").replace("<prefix>", prefix());
         return orUse;
+    }
+
+    public static String onEnable(){
+        String enable = Main.getPlugin(Main.class).getConfig().getString("bot.onEnable");
+        return enable;
+    }
+
+    public static String onDisable(){
+        String disable = Main.getPlugin(Main.class).getConfig().getString("bot.onDisable");
+        return disable;
     }
 
 }

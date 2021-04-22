@@ -1,4 +1,4 @@
-# V 1.0.2 Bot desenvolvido por Av3z#0694 para mais informações
+# V 1.0.3 Bot desenvolvido por Av3z#0694 para mais informações
 # Este bot foi desenvolvido exclusivamente para o servidor CookieMC
 # Este bot está sobe a licensa GNU para mais informações github.com/av3z/bot-cookie-mc
 
@@ -16,10 +16,13 @@ bot:
   copyRight: '&copy CookieMC - Direitos Reservados'
 
   #Mensagem para usar corretamente o embed com 4 parametros
-  use: '> use **<prefix>embed-titulo-descrição completa-field-valor**'
+  use: '> para criar embed completo use **<prefix>embed-titulo-descrição completa-field-valor**'
+
+  # Mensagem com 1 parametro embed só com o titulo
+  useOne: '> para criar com 1 parametro use **<prefix>embed-titulo**'
 
   #Mensagem para usar corretamente o embed com 2 parametros
-  orUse: '> ou **<prefix>embed-titulo-descrição completa**'
+  orUse: '> para criar com 2 parametros **<prefix>embed-titulo-descrição completa**'
 
   # A mensagem representa %msg% pode colocar > ** `` mas  se não tiver %msg% sua msg não irá sair.
   say: '> **%msg%**'
@@ -27,3 +30,9 @@ bot:
   # Aqui você pode configurar a mensagem que irá aparecer caso quem executou o comando
   # não tenha a permissão caso queira citar o usuario use <user>
   noPerm: '> Desculpe **<user>** você não tem permissão!'
+
+  #Mensagem no console do minecrat qnd o bot for iniciado
+  onEnable: '[BOT DISCORD] Bot iniciado'
+
+  #Mensagem no console do minecrat qnd o bot for desligado
+  onDisable: '[BOT DISCORD] Bot desligado'

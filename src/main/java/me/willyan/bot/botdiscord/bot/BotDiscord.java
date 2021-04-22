@@ -12,7 +12,7 @@ public class BotDiscord {
 
     public Main plugin;
     private JDABuilder builder;
-    private String token = "NzM4NjI0MTI0NjA3NTI5MDAw.XyOnUg.te0SXqvQWYpc53R5T2UQM4dyGSg";
+    private String token = "NzM4NjI0MTI0NjA3NTI5MDAw.XyOnUg.JGCPj_645LMjPseran87FFpFSuU";
 
 
     public BotDiscord (Main main){

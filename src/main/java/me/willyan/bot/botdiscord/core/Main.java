@@ -1,6 +1,7 @@
 package me.willyan.bot.botdiscord.core;
 
 import me.willyan.bot.botdiscord.bot.BotDiscord;
+import me.willyan.bot.botdiscord.lib.ConfigManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -15,12 +16,12 @@ public final class Main extends JavaPlugin {
         console = Bukkit.getServer().getConsoleSender();
         new BotDiscord(this);
         saveDefaultConfig();
-        console.sendMessage("Plugin iniciado");
+        console.sendMessage(ConfigManager.onEnable());
 
     }
 
     @Override
     public void onDisable() {
-        console.sendMessage("Plugin desligado");
+        console.sendMessage(ConfigManager.onDisable());
     }
 }
