@@ -1,4 +1,4 @@
-# V 1.0.4 Bot desenvolvido por Av3z#0694 para mais informações
+# V 1.0.5 Bot desenvolvido por Av3z#0694 para mais informações
 # Este bot foi desenvolvido exclusivamente para o servidor CookieMC
 # Este bot está sobe a licensa GNU para mais informações github.com/av3z/bot-cookie-mc
 
@@ -48,3 +48,13 @@ bot:
 
   # Mensagem do comando prefix <prefix> significa o seu prefixo, por favor nao tire.
   msgPrefix: '> o prefix do servidor e <prefix>'
+
+  # Coloque aqui o id do canal que quer que apareça as mensagens do /sugerir
+  channelSugerir: '834804432125427732'
+
+  # Mensagem de use do comando !form
+  useForm: '> use !form <tipo>'
+
+  command1:
+    name: 'command1'
+    msg: 'teste'

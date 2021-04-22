@@ -6,7 +6,6 @@ public class ConfigManager {
 
     public static String noPerm(){
         String noPerm = Main.getPlugin(Main.class).getConfig().getString("bot.noPerm");
-
         return noPerm;
     }
 
@@ -89,5 +88,16 @@ public class ConfigManager {
         String shop = Main.getPlugin(Main.class).getConfig().getString("bot.msgPrefix").replace("<prefix>", prefix());
         return shop;
     }
+
+    public static String getChannelSugerir(){
+        String channel = Main.getPlugin(Main.class).getConfig().getString("bot.channelSugerir");
+        return channel;
+    }
+
+    public static String getUseForm(){
+        String form = Main.getPlugin(Main.class).getConfig().getString("bot.useForm");
+        return form;
+    }
+
 
 }

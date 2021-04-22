@@ -1,35 +1,33 @@
 package me.willyan.bot.botdiscord.events;
 
-import me.willyan.bot.botdiscord.commands.CommandAtt;
-import me.willyan.bot.botdiscord.commands.CommandAvatar;
-import me.willyan.bot.botdiscord.commands.CommandEmbed;
-import me.willyan.bot.botdiscord.commands.CommandSay;
+import me.willyan.bot.botdiscord.commands.*;
 import me.willyan.bot.botdiscord.util.Message;
 import me.willyan.bot.botdiscord.lib.ConfigManager;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+import java.util.List;
+
 public class OnMessage extends ListenerAdapter {
 
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
-        String[] args = e.getMessage().getContentRaw().split("\\s+");
+        String[] args = e.getMessage().getContentRaw().split(" ");
         String[] arg = e.getMessage().getContentRaw().split("-");
+        String author = e.getMessage().getAuthor().getAsMention();
+        int membros = e.getGuild().getMembers().size();
         boolean bot = e.getMessage().getAuthor().isBot();
         boolean adm = e.getMember().hasPermission(Permission.ADMINISTRATOR);
 
 
-
-        if (args[0].equalsIgnoreCase(ConfigManager.prefix() + "say")) {
+        if (args[0].equalsIgnoreCase(ConfigManager.prefix() + "say") || args[0].equalsIgnoreCase(ConfigManager.prefix() + "falar")) {
             Message.delete(e);
 
             if (bot) return;
 
             if (adm) {
-                if (e.getMessage().getContentRaw().startsWith(ConfigManager.prefix() + "say")) {
-                    CommandSay.send(e, args);
-                    return;
-                }
+                CommandSay.send(e, args);
+                return;
 
             }
         }
@@ -41,19 +39,16 @@ public class OnMessage extends ListenerAdapter {
 
             if (adm) {
 
-                if(arg.length == 2){
+                if (arg.length == 2) {
                     CommandEmbed.send(e, arg[1]);
                     return;
-                }
-                else if (arg.length == 3) {
+                } else if (arg.length == 3) {
                     CommandEmbed.send(e, arg[1], arg[2]);
                     return;
-                }
-                else if (arg.length == 5) {
+                } else if (arg.length == 5) {
                     CommandEmbed.send(e, arg[1], arg[2], arg[3], arg[4]);
                     return;
-                }
-                else {
+                } else {
                     e.getChannel().sendMessage(ConfigManager.useOneReplaced()).queue();
                     e.getChannel().sendMessage(ConfigManager.useReplaced()).queue();
                     e.getChannel().sendMessage(ConfigManager.orUseReplaced()).queue();
@@ -63,53 +58,97 @@ public class OnMessage extends ListenerAdapter {
 
         }
 
-        if(args[0].equalsIgnoreCase(ConfigManager.prefix() + "avatar")){
+        if (args[0].equalsIgnoreCase(ConfigManager.prefix() + "avatar") || args[0].equalsIgnoreCase(ConfigManager.prefix() + "icone")) {
             Message.delete(e);
 
-            if(bot) return;
+            if (bot) return;
 
-            if(args.length == 2){
+            if (args.length == 2) {
                 String avatar = e.getMessage().getMentionedUsers().get(0).getAvatarUrl();
-                CommandAvatar.send(e,avatar);
-            }else {
+                String target = e.getMessage().getMentionedUsers().get(0).getName();
+                CommandAvatar.send(e, avatar, target);
+            } else {
                 e.getChannel().sendMessage(ConfigManager.useAvatar());
             }
 
         }
 
-        if(args[0].equalsIgnoreCase(ConfigManager.prefix() + "help") || args[0].equalsIgnoreCase(ConfigManager.prefix() + "ajuda")){
+        if (args[0].equalsIgnoreCase(ConfigManager.prefix() + "help") || args[0].equalsIgnoreCase(ConfigManager.prefix() + "ajuda")) {
             Message.delete(e);
 
-            if(bot) return;
+            if (bot) return;
 
             e.getChannel().sendMessage("> **[!say !embed !help]**").queue();
 
 
         }
 
-        if(args[0].equalsIgnoreCase(ConfigManager.prefix() + "att")){
+        if (args[0].equalsIgnoreCase(ConfigManager.prefix() + "att")) {
             Message.delete(e);
-            if(bot) return;
+            if (bot) return;
 
-            if(adm) {
+            if (adm) {
                 CommandAtt.send(e, args);
             }
 
         }
 
-        if(args[0].equalsIgnoreCase(ConfigManager.prefix() + "ip")){
+        if (args[0].equalsIgnoreCase(ConfigManager.prefix() + "ip")) {
             e.getChannel().sendMessage(ConfigManager.getIp()).queue();
         }
 
-        if(args[0].equalsIgnoreCase(ConfigManager.prefix() + "loja")){
+        if (args[0].equalsIgnoreCase(ConfigManager.prefix() + "loja")) {
             e.getChannel().sendMessage(ConfigManager.getShop()).queue();
         }
 
-        if(args[0].equalsIgnoreCase(ConfigManager.prefix() + "prefix")){
+        if (args[0].equalsIgnoreCase(ConfigManager.prefix() + "prefix") || args[0].equalsIgnoreCase(ConfigManager.prefix() + "prefixo")) {
             e.getChannel().sendMessage(ConfigManager.getMsgPrefix()).queue();
         }
 
+        if (args[0].equalsIgnoreCase(ConfigManager.prefix() + "sugerir")) {
+            Message.delete(e);
+
+            if (bot) return;
+
+            CommandSugerir.send(e, "**-----------------------------------------------------------**");
+            CommandSugerir.send(e,"ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ");
+            CommandSugerir.send(e, "> **Sugestão do Membro: **" + author);
+            CommandSugerir.send(e,"ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ");
+            CommandSugerir.send(e, args);
+            CommandSugerir.send(e,"ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ");
+            CommandSugerir.send(e, "**-----------------------------------------------------------**");
+        }
+
+
+        if (args[0].equalsIgnoreCase(ConfigManager.prefix() + "form")) {
+            Message.delete(e);
+
+
+            if(args.length >= 1){
+
+                if(args[1].equalsIgnoreCase( "mod") || args[1].equalsIgnoreCase("gc")){
+                    Message.send(e, "> " + author);
+                    Message.send(e, "**Link para o formulário de MOD-GC:** https://forms.gle/JS77HuCCr5XYgPPcA");
+                } else if (args[1].equalsIgnoreCase("ajudante") || args[1].equalsIgnoreCase("helper")){
+                    Message.send(e, "> " + author);
+                    Message.send(e, "**Link para o formulário de AJUDANTE:** https://forms.gle/NQb5Ect8YYnnyzm8A");
+                }
+
+            } else {
+                Message.send(e, ConfigManager.getUseForm());
+            }
+        }
+
+        if(args[0].equalsIgnoreCase(ConfigManager.prefix() + "clear")){
+            Message.delete(e);
+            if(bot) return;
+            if(adm){
+                List<net.dv8tion.jda.api.entities.Message> messages = e.getChannel().getHistory().retrievePast(Integer.valueOf(args[1])).complete();
+                e.getChannel().deleteMessages(messages).queue();
+                Message.send(e, "> **Chat Limpo por:** " + author);
+            }
+
+        }
 
     }
-
 }
