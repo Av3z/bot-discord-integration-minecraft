@@ -23,3 +23,7 @@ bot:
 
   # A mensagem representa %msg% pode colocar > ** `` mas  se não tiver %msg% sua msg não irá sair.
   say: '> **%msg%**'
+
+  # Aqui você pode configurar a mensagem que irá aparecer caso quem executou o comando
+  # não tenha a permissão caso queira citar o usuario use <user>
+  noPerm: '> Desculpe **<user>** você não tem permissão!'

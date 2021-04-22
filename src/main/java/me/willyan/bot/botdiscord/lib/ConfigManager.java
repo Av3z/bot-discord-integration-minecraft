@@ -4,6 +4,12 @@ import me.willyan.bot.botdiscord.core.Main;
 
 public class ConfigManager {
 
+    public static String noPerm(){
+        String noPerm = Main.getPlugin(Main.class).getConfig().getString("bot.noPerm");
+
+        return noPerm;
+    }
+
     public static String say(String msg){
         String say = Main.getPlugin(Main.class).getConfig().getString("bot.say").replace("%msg%", msg);
         return say;
