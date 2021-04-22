@@ -9,6 +9,6 @@ public class AllArgs {
             msg += args[i] + " ";
         }
 
-        return msg.trim();
+        return msg;
     }
 }

@@ -12,29 +12,21 @@ public class BotDiscord {
 
     public Main plugin;
     private JDABuilder builder;
-    private String token = "NzM4NjI0MTI0NjA3NTI5MDAw.XyOnUg.nRs4pH0fG_HfU1wDhv94TP6XjWY";
-
+    private String token = "";
 
     public BotDiscord (Main main){
         this.plugin = main;
         start();
     }
 
-
     private void start(){
-
         try {
-
             builder = JDABuilder.createDefault(token);
             builder.setActivity(Activity.playing(ConfigManager.playing()));
             builder.addEventListeners(new OnMessage());
             builder.build();
-
         } catch (LoginException e) {
             e.printStackTrace();
         }
-
-
     }
-
 }

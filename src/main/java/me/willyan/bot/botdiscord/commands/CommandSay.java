@@ -8,12 +8,7 @@ public class CommandSay {
 
     public static void send(GuildMessageReceivedEvent e, String[] args){
         String msg = AllArgs.build(1, args);
-        e.getChannel().sendMessage(ConfigManager.say(msg)).complete();
-    }
-
-    public static void delete(GuildMessageReceivedEvent e){
-        String id = e.getChannel().getLatestMessageId();
-        e.getChannel().deleteMessageById(id).complete();
+        e.getChannel().sendMessage(ConfigManager.say(msg)).queue();
     }
 
 

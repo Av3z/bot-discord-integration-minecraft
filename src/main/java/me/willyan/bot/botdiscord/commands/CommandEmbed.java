@@ -1,6 +1,6 @@
 package me.willyan.bot.botdiscord.commands;
 
-import me.willyan.bot.botdiscord.lib.Embed;
+import me.willyan.bot.botdiscord.util.Embed;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 public class CommandEmbed {

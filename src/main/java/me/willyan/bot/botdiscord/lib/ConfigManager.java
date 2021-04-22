@@ -70,4 +70,24 @@ public class ConfigManager {
         return disable;
     }
 
+    public static String useAvatar(){
+        String avatar = Main.getPlugin(Main.class).getConfig().getString("bot.useAvatar");
+        return avatar;
+    }
+
+    public static String getIp(){
+        String ip = Main.getPlugin(Main.class).getConfig().getString("bot.ip");
+        return ip;
+    }
+
+    public static String getShop(){
+        String shop = Main.getPlugin(Main.class).getConfig().getString("bot.loja");
+        return shop;
+    }
+
+    public static String getMsgPrefix(){
+        String shop = Main.getPlugin(Main.class).getConfig().getString("bot.msgPrefix").replace("<prefix>", prefix());
+        return shop;
+    }
+
 }

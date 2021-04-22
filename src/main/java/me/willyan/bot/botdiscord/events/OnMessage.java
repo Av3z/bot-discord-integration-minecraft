@@ -1,7 +1,10 @@
 package me.willyan.bot.botdiscord.events;
 
+import me.willyan.bot.botdiscord.commands.CommandAtt;
+import me.willyan.bot.botdiscord.commands.CommandAvatar;
 import me.willyan.bot.botdiscord.commands.CommandEmbed;
 import me.willyan.bot.botdiscord.commands.CommandSay;
+import me.willyan.bot.botdiscord.util.Message;
 import me.willyan.bot.botdiscord.lib.ConfigManager;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -18,7 +21,7 @@ public class OnMessage extends ListenerAdapter {
 
 
         if (args[0].equalsIgnoreCase(ConfigManager.prefix() + "say")) {
-            CommandSay.delete(e);
+            Message.delete(e);
 
             if (bot) return;
 
@@ -32,7 +35,7 @@ public class OnMessage extends ListenerAdapter {
         }
 
         if (arg[0].equalsIgnoreCase(ConfigManager.prefix() + "embed")) {
-            CommandSay.delete(e);
+            Message.delete(e);
 
             if (bot) return;
 
@@ -58,6 +61,52 @@ public class OnMessage extends ListenerAdapter {
                 }
             }
 
+        }
+
+        if(args[0].equalsIgnoreCase(ConfigManager.prefix() + "avatar")){
+            Message.delete(e);
+
+            if(bot) return;
+
+            if(args.length == 2){
+                String avatar = e.getMessage().getMentionedUsers().get(0).getAvatarUrl();
+                CommandAvatar.send(e,avatar);
+            }else {
+                e.getChannel().sendMessage(ConfigManager.useAvatar());
+            }
+
+        }
+
+        if(args[0].equalsIgnoreCase(ConfigManager.prefix() + "help") || args[0].equalsIgnoreCase(ConfigManager.prefix() + "ajuda")){
+            Message.delete(e);
+
+            if(bot) return;
+
+            e.getChannel().sendMessage("> **[!say !embed !help]**").queue();
+
+
+        }
+
+        if(args[0].equalsIgnoreCase(ConfigManager.prefix() + "att")){
+            Message.delete(e);
+            if(bot) return;
+
+            if(adm) {
+                CommandAtt.send(e, args);
+            }
+
+        }
+
+        if(args[0].equalsIgnoreCase(ConfigManager.prefix() + "ip")){
+            e.getChannel().sendMessage(ConfigManager.getIp()).queue();
+        }
+
+        if(args[0].equalsIgnoreCase(ConfigManager.prefix() + "loja")){
+            e.getChannel().sendMessage(ConfigManager.getShop()).queue();
+        }
+
+        if(args[0].equalsIgnoreCase(ConfigManager.prefix() + "prefix")){
+            e.getChannel().sendMessage(ConfigManager.getMsgPrefix()).queue();
         }
 
 
