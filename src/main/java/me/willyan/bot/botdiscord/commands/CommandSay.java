@@ -8,7 +8,7 @@ public class CommandSay {
 
     public static void send(GuildMessageReceivedEvent e, String[] args){
         String msg = AllArgs.build(1, args);
-        e.getChannel().sendMessage(ConfigManager.say(msg)).queue();
+        e.getChannel().sendMessage(ConfigManager.get("say", "%msg%", msg)).queue();
     }
 
 

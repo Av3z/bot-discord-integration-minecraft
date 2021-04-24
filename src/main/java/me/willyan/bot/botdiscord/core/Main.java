@@ -16,12 +16,12 @@ public final class Main extends JavaPlugin {
         console = Bukkit.getServer().getConsoleSender();
         new BotDiscord(this);
         saveDefaultConfig();
-        console.sendMessage(ConfigManager.onEnable());
+        console.sendMessage(ConfigManager.get("onEnable"));
 
     }
 
     @Override
     public void onDisable() {
-        console.sendMessage(ConfigManager.onDisable());
+        console.sendMessage(ConfigManager.get("onDisable"));
     }
 }

@@ -8,11 +8,11 @@ public class CommandSugerir {
 
     public static void send(GuildMessageReceivedEvent e, String[] args){
         String msg = AllArgs.build(1, args);
-        e.getJDA().getTextChannelById(ConfigManager.getChannelSugerir()).sendMessage(msg).queue();
+        e.getJDA().getTextChannelById(ConfigManager.get("channelSugerir")).sendMessage(msg).queue();
     }
 
     public static void send(GuildMessageReceivedEvent e, String msg){
-        e.getJDA().getTextChannelById(ConfigManager.getChannelSugerir()).sendMessage(msg).queue();
+        e.getJDA().getTextChannelById(ConfigManager.get("channelSugerir")).sendMessage(msg).queue();
     }
 
 }

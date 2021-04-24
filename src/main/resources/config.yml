@@ -58,6 +58,5 @@ bot:
   # Mensagem de use do comando clear
   useClear: '> use !clear <quantidade>'
 
-  command1:
-    name: 'command1'
-    msg: 'teste'
+  # Mensagem do comando help
+  help: '> **[!say !embed !help !att !ip !loja !form !sugerir !clear !avatar]**'

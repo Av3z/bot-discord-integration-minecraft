@@ -12,7 +12,6 @@ public class BotDiscord {
 
     public Main plugin;
     private JDABuilder builder;
-    private String token = "";
 
     public BotDiscord (Main main){
         this.plugin = main;
@@ -21,8 +20,8 @@ public class BotDiscord {
 
     private void start(){
         try {
-            builder = JDABuilder.createDefault(token);
-            builder.setActivity(Activity.playing(ConfigManager.playing()));
+            builder = JDABuilder.createDefault(ConfigManager.TOKEN);
+            builder.setActivity(Activity.playing(ConfigManager.get("playing")));
             builder.addEventListeners(new OnMessage());
             builder.build();
         } catch (LoginException e) {
