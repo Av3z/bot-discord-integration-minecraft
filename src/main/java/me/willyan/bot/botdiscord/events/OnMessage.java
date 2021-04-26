@@ -2,12 +2,9 @@ package me.willyan.bot.botdiscord.events;
 
 import me.willyan.bot.botdiscord.commands.*;
 import me.willyan.bot.botdiscord.lib.ConfigManager;
-import me.willyan.bot.botdiscord.util.Message;
+import me.willyan.bot.botdiscord.util.IMessage;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Category;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -27,7 +24,7 @@ public class OnMessage extends ListenerAdapter {
 
 
         if (args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "say") || args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "falar") || args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "falar")) {
-            Message.delete(e);
+            IMessage.delete(e);
 
             if (bot) return;
 
@@ -39,7 +36,7 @@ public class OnMessage extends ListenerAdapter {
         }
 
         if (arg[0].equalsIgnoreCase(ConfigManager.get("prefix") + "embed")) {
-            Message.delete(e);
+            IMessage.delete(e);
 
             if (bot) return;
 
@@ -65,7 +62,7 @@ public class OnMessage extends ListenerAdapter {
         }
 
         if (args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "avatar") || args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "icone")) {
-            Message.delete(e);
+            IMessage.delete(e);
 
             if (bot) return;
 
@@ -82,7 +79,7 @@ public class OnMessage extends ListenerAdapter {
         }
 
         if (args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "help") || args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "ajuda")) {
-            Message.delete(e);
+            IMessage.delete(e);
 
             if (bot) return;
 
@@ -92,7 +89,7 @@ public class OnMessage extends ListenerAdapter {
         }
 
         if (args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "att")) {
-            Message.delete(e);
+            IMessage.delete(e);
             if (bot) return;
 
             if (adm) {
@@ -118,7 +115,7 @@ public class OnMessage extends ListenerAdapter {
         }
 
         if (args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "sugerir")) {
-            Message.delete(e);
+            IMessage.delete(e);
 
             if (bot) return;
 
@@ -133,46 +130,44 @@ public class OnMessage extends ListenerAdapter {
 
 
         if (args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "form")) {
-            Message.delete(e);
+            IMessage.delete(e);
 
 
             if (args.length == 2) {
 
                 if (args[1].equalsIgnoreCase("mod") || args[1].equalsIgnoreCase("gc")) {
-                    Message.send(e, "> " + author);
-                    Message.send(e, "**Link para o formulário de MOD-GC:** https://forms.gle/JS77HuCCr5XYgPPcA");
+                    IMessage.send(e, "> " + author);
+                    IMessage.send(e, "**Link para o formulário de MOD-GC:** https://forms.gle/JS77HuCCr5XYgPPcA");
                     return;
                 } else if (args[1].equalsIgnoreCase("ajudante") || args[1].equalsIgnoreCase("helper")) {
-                    Message.send(e, "> " + author);
-                    Message.send(e, "**Link para o formulário de AJUDANTE:** https://forms.gle/NQb5Ect8YYnnyzm8A");
+                    IMessage.send(e, "> " + author);
+                    IMessage.send(e, "**Link para o formulário de AJUDANTE:** https://forms.gle/NQb5Ect8YYnnyzm8A");
                     return;
                 }
 
             } else {
-                Message.send(e, ConfigManager.get("useForm"));
+                IMessage.send(e, ConfigManager.get("useForm"));
                 return;
             }
         }
 
         if (args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "clear")) {
-            Message.delete(e);
+            IMessage.delete(e);
             if (bot) return;
             if (adm) {
-                if (args.length == 2) {
-                    List<net.dv8tion.jda.api.entities.Message> messages = e.getChannel().getHistory().retrievePast(Integer.valueOf(args[1])).complete();
+                if(args.length == 2) {
+                    List<Message> messages = e.getChannel().getHistory().retrievePast(Integer.valueOf(args[1])).complete();
                     e.getChannel().deleteMessages(messages).queue();
-                    Message.send(e, "> **Chat Limpo por:** " + author);
-                    return;
+                    IMessage.send(e, "> **Chat Limpo por:** " + author);
                 } else {
-                    Message.send(e, ConfigManager.get("useClear"));
-                    return;
+                    IMessage.send(e, ConfigManager.get("useClear"));
                 }
             }
 
         }
 
         if (args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "ticket")) {
-            Message.delete(e);
+            IMessage.delete(e);
 
             if (bot) return;
 
@@ -180,7 +175,7 @@ public class OnMessage extends ListenerAdapter {
 
                 for (TextChannel tChannel : guild.getTextChannels()) {
                     if (tChannel.getName().equalsIgnoreCase("ticket-" + member.getId())) {
-                        Message.send(e, "" + ConfigManager.get("ticketIsOpened", "<user>", member.getAsMention()));
+                        IMessage.send(e, "" + ConfigManager.get("ticketIsOpened", "<user>", member.getAsMention()));
                         return;
                     }
                 }
@@ -204,7 +199,7 @@ public class OnMessage extends ListenerAdapter {
 
                     ticket.get(0).delete().queue();
                 } else {
-                    Message.send(e, "" + ConfigManager.get("noTickets", "<user>", member.getAsMention()));
+                    IMessage.send(e, "" + ConfigManager.get("noTickets", "<user>", member.getAsMention()));
                 }
 
             }
@@ -213,7 +208,7 @@ public class OnMessage extends ListenerAdapter {
 
         if (args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "ping")) {
             long time = System.currentTimeMillis();
-            Message.send(e, "" + (System.currentTimeMillis() - time) + " **ms**");
+            IMessage.send(e, "" + (System.currentTimeMillis() - time) + " **ms**");
         }
 
     }

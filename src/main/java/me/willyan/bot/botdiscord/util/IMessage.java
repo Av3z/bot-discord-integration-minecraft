@@ -2,7 +2,7 @@ package me.willyan.bot.botdiscord.util;
 
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
-public class Message {
+public class IMessage {
 
     public static void delete(GuildMessageReceivedEvent e){
         String id = e.getChannel().getLatestMessageId();
