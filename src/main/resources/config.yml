@@ -50,10 +50,10 @@ bot:
   msgPrefix: '> o prefix do servidor e <prefix>'
 
   # Coloque aqui o id do canal que quer que apareça as mensagens do /sugerir
-  channelSugerir: '834804432125427732'
+  channelSugerir: '834897683638124676'
 
   # Coloque o ID da categoria que o bot ira criar os tickets;
-  category: '834614398583963669'
+  category: '751906455363518565'
 
   # Mensagem de use do comando form
   useForm: '> use !form <tipo>'
@@ -63,3 +63,17 @@ bot:
 
   # Mensagem do comando help
   help: '> **[!say !embed !help !att !ip !loja !form !sugerir !clear !avatar]**'
+
+  # Mensagem caso o ticket seja criado com sucesso! a tag <user> representa o usuario exemplo @Av3z
+  ticketSuccess: '> <user> **Seu ticket foi criado com sucesso!**'
+
+  # Mensagem que ira aparecer caso o usuario não tenha nenhum ticket aberto no momento e está tentando deletar.
+  # a tag <user> representa o usuario exemplo @Av3z
+  noTickets: '> <user> Você nao tem nenhum ticket aberto!'
+
+  # Mensagem que o usuario irá receber no chat privado quando resolver o ticket. a tag <user> representa o usuario exemplo @Av3z
+  ticketSolved: '> <user> Seu ticket foi resolvido com sucesso! Obrigado por jogar em nosso servidor! ASS: **CookieMC**'
+
+  # Mensagem de erro que irá aparecer caso o usuario tente abrir mais de um ticket, ou abrir um ticket, com outro aberto.
+  # a tag <user> representa o usuario exemplo @Av3z
+  ticketIsOpened: '>  <user> **Você não pode abrir um ticket, pois já tem um aberto!**'

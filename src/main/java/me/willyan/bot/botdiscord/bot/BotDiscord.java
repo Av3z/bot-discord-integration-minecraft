@@ -22,6 +22,7 @@ public class BotDiscord {
         try {
             builder = JDABuilder.createDefault(ConfigManager.TOKEN);
             builder.setActivity(Activity.playing(ConfigManager.get("playing")));
+            builder.setAutoReconnect(true);
             registerEvents();
             builder.build();
         } catch (LoginException e) {
