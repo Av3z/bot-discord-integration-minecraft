@@ -66,6 +66,8 @@ bot:
 
   # Mensagem caso o ticket seja criado com sucesso! a tag <user> representa o usuario exemplo @Av3z
   ticketSuccess: '> <user> **Seu ticket foi criado com sucesso!**'
+  ticketSuccess2: '> Aguarde algum <suporte> te responder!'
+  ticketSuccess3: '> Caso seu problema seja resolvido digite **<prefix>ticket ok**'
 
   # Mensagem que ira aparecer caso o usuario não tenha nenhum ticket aberto no momento e está tentando deletar.
   # a tag <user> representa o usuario exemplo @Av3z
@@ -77,3 +79,6 @@ bot:
   # Mensagem de erro que irá aparecer caso o usuario tente abrir mais de um ticket, ou abrir um ticket, com outro aberto.
   # a tag <user> representa o usuario exemplo @Av3z
   ticketIsOpened: '>  <user> **Você não pode abrir um ticket, pois já tem um aberto!**'
+
+  # Coloque o id do cargo que você quer que veja e responda os ticket, recomendo botar como SUPORTE o nome do cargo.
+  idRoleSuporte: '836270744304222319'

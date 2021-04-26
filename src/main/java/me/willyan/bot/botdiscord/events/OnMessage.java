@@ -10,6 +10,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Objects;
 
 public class OnMessage extends ListenerAdapter {
 
@@ -18,7 +19,7 @@ public class OnMessage extends ListenerAdapter {
         String[] arg = e.getMessage().getContentRaw().split("-");
         String author = e.getMessage().getAuthor().getAsMention();
         boolean bot = e.getMessage().getAuthor().isBot();
-        boolean adm = e.getMember().hasPermission(Permission.ADMINISTRATOR);
+        boolean adm = Objects.requireNonNull(e.getMember()).hasPermission(Permission.ADMINISTRATOR);
         Guild guild = e.getGuild();
         Member member = e.getMember();
 
@@ -31,8 +32,9 @@ public class OnMessage extends ListenerAdapter {
             if (adm) {
                 CommandSay.send(e, args);
                 return;
-
             }
+
+            IMessage.send(e, ConfigManager.get("noPerm"));
         }
 
         if (arg[0].equalsIgnoreCase(ConfigManager.get("prefix") + "embed")) {
@@ -59,6 +61,8 @@ public class OnMessage extends ListenerAdapter {
                 }
             }
 
+            IMessage.send(e, ConfigManager.get("noPerm"));
+
         }
 
         if (args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "avatar") || args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "icone")) {
@@ -71,10 +75,9 @@ public class OnMessage extends ListenerAdapter {
                 String target = e.getMessage().getMentionedUsers().get(0).getName();
                 CommandAvatar.send(e, avatar, target);
                 return;
-            } else {
-                e.getChannel().sendMessage(ConfigManager.get("useAvatar"));
-                return;
             }
+
+            IMessage.send(e, ConfigManager.get("useAvatar", "<user>", author));
 
         }
 
@@ -96,6 +99,8 @@ public class OnMessage extends ListenerAdapter {
                 CommandAtt.send(e, args);
                 return;
             }
+
+            IMessage.send(e, ConfigManager.get("useAvatar", "<user>", author));
 
         }
 
@@ -156,7 +161,8 @@ public class OnMessage extends ListenerAdapter {
             if (bot) return;
             if (adm) {
                 if(args.length == 2) {
-                    List<Message> messages = e.getChannel().getHistory().retrievePast(Integer.valueOf(args[1])).complete();
+                    int total = Integer.parseInt(args[1]);
+                    List<Message> messages = e.getChannel().getHistory().retrievePast(total).complete();
                     e.getChannel().deleteMessages(messages).queue();
                     IMessage.send(e, "> **Chat Limpo por:** " + author);
                 } else {
@@ -171,7 +177,7 @@ public class OnMessage extends ListenerAdapter {
 
             if (bot) return;
 
-            if (args[1].equalsIgnoreCase("create")) {
+            if (args[1].equalsIgnoreCase("create") || args[1].equalsIgnoreCase("criar")) {
 
                 for (TextChannel tChannel : guild.getTextChannels()) {
                     if (tChannel.getName().equalsIgnoreCase("ticket-" + member.getId())) {
@@ -186,6 +192,9 @@ public class OnMessage extends ListenerAdapter {
                         .addPermissionOverride(guild.getPublicRole(), null, EnumSet.of(Permission.VIEW_CHANNEL))
                         .complete();
                 textChannel.sendMessage("" + ConfigManager.get("ticketSuccess", "<user>", member.getAsMention())).queue();
+                textChannel.sendMessage("" + ConfigManager.get("ticketSuccess2", "<suporte>" , Objects.requireNonNull(guild.getRoleById(ConfigManager.get("idRoleSuporte"))).getAsMention())).queue();
+                textChannel.sendMessage("" + ConfigManager.getWithPrefix("ticketSuccess3")).queue();
+
             }
 
             if (args[1].equalsIgnoreCase("ok")) {
@@ -193,9 +202,8 @@ public class OnMessage extends ListenerAdapter {
                 List<TextChannel> ticket = guild.getTextChannelsByName("ticket-"+member.getId(), true);
 
                 if(ticket.size() > 0){
-                    member.getUser().openPrivateChannel().queue(channel -> {
-                        channel.sendMessage("" + ConfigManager.get("ticketSolved", "<user>", author)).queue();
-                    });
+                    member.getUser().openPrivateChannel().queue(channel ->
+                            channel.sendMessage("" + ConfigManager.get("ticketSolved", "<user>", author)).queue());
 
                     ticket.get(0).delete().queue();
                 } else {
