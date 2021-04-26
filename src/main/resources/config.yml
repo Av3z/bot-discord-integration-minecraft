@@ -52,6 +52,9 @@ bot:
   # Coloque aqui o id do canal que quer que apareça as mensagens do /sugerir
   channelSugerir: '834804432125427732'
 
+  # Coloque o ID da categoria que o bot ira criar os tickets;
+  category: '834614398583963669'
+
   # Mensagem de use do comando form
   useForm: '> use !form <tipo>'
 

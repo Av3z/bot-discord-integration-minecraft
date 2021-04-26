@@ -4,9 +4,14 @@ import me.willyan.bot.botdiscord.commands.*;
 import me.willyan.bot.botdiscord.util.Message;
 import me.willyan.bot.botdiscord.lib.ConfigManager;
 import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+import javax.xml.soap.Text;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.EnumSet;
 import java.util.List;
 
 public class OnMessage extends ListenerAdapter {
@@ -17,6 +22,10 @@ public class OnMessage extends ListenerAdapter {
         String author = e.getMessage().getAuthor().getAsMention();
         boolean bot = e.getMessage().getAuthor().isBot();
         boolean adm = e.getMember().hasPermission(Permission.ADMINISTRATOR);
+        Guild guild = e.getGuild();
+        Member member = e.getMember();
+        MessageChannel channelActual = e.getChannel();
+        String messageID = e.getMessageId();
 
 
         if (args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "say") || args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "falar") || args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "falar")) {
@@ -166,7 +175,22 @@ public class OnMessage extends ListenerAdapter {
         }
 
         if (args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "ticket")){
-            Message.send(e, "> **Comando Ticket ainda está em desenvolvimento.** " + author);
+            Message.delete(e);
+
+            if(bot) return;
+
+
+            for (TextChannel tChannel : guild.getTextChannels()){
+                if(tChannel.getName().equalsIgnoreCase("ticket-" + member.getId())){
+                    Message.send(e, "> **Você não pode abrir um ticket, pois já tem um aberto!**");
+                    return;
+                }
+            }
+
+            Category category = guild.getCategoryById("834614398583963669");
+
+            TextChannel textChannel = guild.createTextChannel("ticket-" + member.getId(), category).addPermissionOverride(member, EnumSet.of(Permission.VIEW_CHANNEL, Permission.MESSAGE_WRITE, Permission.MESSAGE_READ, Permission.MESSAGE_HISTORY, Permission.MESSAGE_EMBED_LINKS, Permission.MESSAGE_ATTACH_FILES, Permission.MESSAGE_ADD_REACTION, Permission.MESSAGE_EXT_EMOJI), null).complete();
+
         }
 
         if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "ping")){
