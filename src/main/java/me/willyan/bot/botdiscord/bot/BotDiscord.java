@@ -22,10 +22,14 @@ public class BotDiscord {
         try {
             builder = JDABuilder.createDefault(ConfigManager.TOKEN);
             builder.setActivity(Activity.playing(ConfigManager.get("playing")));
-            builder.addEventListeners(new OnMessage());
+            registerEvents();
             builder.build();
         } catch (LoginException e) {
             e.printStackTrace();
         }
+    }
+
+    public void registerEvents(){
+        builder.addEventListeners(new OnMessage());
     }
 }

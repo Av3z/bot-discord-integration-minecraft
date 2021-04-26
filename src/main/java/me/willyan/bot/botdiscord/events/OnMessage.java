@@ -169,5 +169,10 @@ public class OnMessage extends ListenerAdapter {
             Message.send(e, "> **Comando Ticket ainda está em desenvolvimento.** " + author);
         }
 
+        if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "ping")){
+            long time = System.currentTimeMillis();
+            Message.send(e, ""+ (System.currentTimeMillis() - time) + " **ms**");
+        }
+
     }
 }
