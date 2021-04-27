@@ -15,10 +15,11 @@ import java.util.Objects;
 public class OnMessage extends ListenerAdapter {
 
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
+
         String[] args = e.getMessage().getContentRaw().split(" ");
         String[] arg = e.getMessage().getContentRaw().split("-");
         String author = e.getMessage().getAuthor().getAsMention();
-        boolean bot = e.getMessage().getAuthor().isBot();
+        boolean bot =  Objects.requireNonNull(e.getMessage().getAuthor().isBot());
         boolean adm = Objects.requireNonNull(e.getMember()).hasPermission(Permission.ADMINISTRATOR);
         Guild guild = e.getGuild();
         Member member = e.getMember();
@@ -34,7 +35,7 @@ public class OnMessage extends ListenerAdapter {
                 return;
             }
 
-            IMessage.send(e, ConfigManager.get("noPerm"));
+            IMessage.send(e, ConfigManager.get("noPerm", "<user>", author));
         }
 
         if (arg[0].equalsIgnoreCase(ConfigManager.get("prefix") + "embed")) {
@@ -61,7 +62,7 @@ public class OnMessage extends ListenerAdapter {
                 }
             }
 
-            IMessage.send(e, ConfigManager.get("noPerm"));
+            IMessage.send(e, ConfigManager.get("noPerm", "<user>", author));
 
         }
 
@@ -188,7 +189,8 @@ public class OnMessage extends ListenerAdapter {
 
                 Category category = guild.getCategoryById(ConfigManager.get("category"));
 
-                TextChannel textChannel = guild.createTextChannel("ticket-" + member.getId(), category).addPermissionOverride(member, EnumSet.of(Permission.VIEW_CHANNEL, Permission.MESSAGE_WRITE, Permission.MESSAGE_READ, Permission.MESSAGE_HISTORY, Permission.MESSAGE_EMBED_LINKS, Permission.MESSAGE_ATTACH_FILES, Permission.MESSAGE_ADD_REACTION, Permission.MESSAGE_EXT_EMOJI), null)
+                TextChannel textChannel = guild.createTextChannel("ticket-" + member.getId(), category)
+                        .addPermissionOverride(member, EnumSet.of(Permission.VIEW_CHANNEL, Permission.MESSAGE_WRITE, Permission.MESSAGE_READ, Permission.MESSAGE_HISTORY, Permission.MESSAGE_EMBED_LINKS, Permission.MESSAGE_ATTACH_FILES, Permission.MESSAGE_ADD_REACTION, Permission.MESSAGE_EXT_EMOJI), null)
                         .addPermissionOverride(guild.getPublicRole(), null, EnumSet.of(Permission.VIEW_CHANNEL))
                         .complete();
                 textChannel.sendMessage("" + ConfigManager.get("ticketSuccess", "<user>", member.getAsMention())).queue();
@@ -215,8 +217,10 @@ public class OnMessage extends ListenerAdapter {
         }
 
         if (args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "ping")) {
-            long time = System.currentTimeMillis();
-            IMessage.send(e, "" + (System.currentTimeMillis() - time) + " **ms**");
+            e.getJDA().getRestPing().queue(
+                    (ping) -> e.getChannel()
+                    .sendMessageFormat("> " + author + "Você está com %s **ms**", ping).queue()
+            );
         }
 
     }
