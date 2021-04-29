@@ -4,21 +4,18 @@ import me.willyan.bot.botdiscord.core.Main;
 
 public class ConfigManager {
 
-    public static final String TOKEN = "NzM4NjI0MTI0NjA3NTI5MDAw.XyOnUg.ydwLMnlKfEOvxZMSGfGy-_lGFzI";
+    public static final String TOKEN = "NzM4NjI0MTI0NjA3NTI5MDAw.XyOnUg.GL-_UskaD7kGEjkuwP5cvfysgO4";
 
     public static String get(String path){
-        String result = Main.getPlugin(Main.class).getConfig().getString("bot."+path);
-        return result;
+        return Main.getPlugin(Main.class).getConfig().getString("bot."+path);
     }
 
     public static String get(String path, String old, String newParam){
-        String result = Main.getPlugin(Main.class).getConfig().getString("bot."+path).replace(old, newParam);
-        return result;
+        return Main.getPlugin(Main.class).getConfig().getString("bot."+path).replace(old, newParam);
     }
 
     public static String getWithPrefix(String path){
-        String result = Main.getPlugin(Main.class).getConfig().getString("bot."+path).replace("<prefix>", get("prefix"));
-        return result;
+        return Main.getPlugin(Main.class).getConfig().getString("bot."+path).replace("<prefix>", get("prefix"));
     }
 
 

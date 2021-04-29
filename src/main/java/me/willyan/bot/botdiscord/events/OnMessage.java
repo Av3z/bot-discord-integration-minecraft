@@ -19,7 +19,7 @@ public class OnMessage extends ListenerAdapter {
         String[] args = e.getMessage().getContentRaw().split(" ");
         String[] arg = e.getMessage().getContentRaw().split("-");
         String author = e.getMessage().getAuthor().getAsMention();
-        boolean bot =  Objects.requireNonNull(e.getMessage().getAuthor().isBot());
+        boolean bot = e.getMessage().getAuthor().isBot();
         boolean adm = Objects.requireNonNull(e.getMember()).hasPermission(Permission.ADMINISTRATOR);
         Guild guild = e.getGuild();
         Member member = e.getMember();
@@ -178,6 +178,7 @@ public class OnMessage extends ListenerAdapter {
 
             if (bot) return;
 
+
             if (args[1].equalsIgnoreCase("create") || args[1].equalsIgnoreCase("criar")) {
 
                 for (TextChannel tChannel : guild.getTextChannels()) {
@@ -192,7 +193,9 @@ public class OnMessage extends ListenerAdapter {
                 TextChannel textChannel = guild.createTextChannel("ticket-" + member.getId(), category)
                         .addPermissionOverride(member, EnumSet.of(Permission.VIEW_CHANNEL, Permission.MESSAGE_WRITE, Permission.MESSAGE_READ, Permission.MESSAGE_HISTORY, Permission.MESSAGE_EMBED_LINKS, Permission.MESSAGE_ATTACH_FILES, Permission.MESSAGE_ADD_REACTION, Permission.MESSAGE_EXT_EMOJI), null)
                         .addPermissionOverride(guild.getPublicRole(), null, EnumSet.of(Permission.VIEW_CHANNEL))
+                        .addPermissionOverride(Objects.requireNonNull(guild.getRoleById(ConfigManager.get("idRoleSuporte"))), EnumSet.of(Permission.VIEW_CHANNEL, Permission.MESSAGE_WRITE, Permission.MESSAGE_READ, Permission.MESSAGE_HISTORY, Permission.MESSAGE_EMBED_LINKS, Permission.MESSAGE_ATTACH_FILES, Permission.MESSAGE_ADD_REACTION, Permission.MESSAGE_EXT_EMOJI), null)
                         .complete();
+
                 textChannel.sendMessage("" + ConfigManager.get("ticketSuccess", "<user>", member.getAsMention())).queue();
                 textChannel.sendMessage("" + ConfigManager.get("ticketSuccess2", "<suporte>" , Objects.requireNonNull(guild.getRoleById(ConfigManager.get("idRoleSuporte"))).getAsMention())).queue();
                 textChannel.sendMessage("" + ConfigManager.getWithPrefix("ticketSuccess3")).queue();
@@ -219,7 +222,7 @@ public class OnMessage extends ListenerAdapter {
         if (args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "ping")) {
             e.getJDA().getRestPing().queue(
                     (ping) -> e.getChannel()
-                    .sendMessageFormat("> " + author + "Você está com %s **ms**", ping).queue()
+                    .sendMessageFormat("> " + author + " Você está com %s **ms**", ping).queue()
             );
         }
 
