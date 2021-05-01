@@ -1,8 +1,8 @@
-<h1> Bot DISCORD </h1>
+#BOT DISCORD
 
 ##Sobre
 
- um bot de discord com algumas funcionalidades e também tem integração com o minecraft, este bot foi desenvolvido inicialmente para um servidor, porem como foi um bot gratuito tomei a liberade de pedir ao boto para colocar em meu github pelo fato de eu ter desenvolvido o mesmo totalmente sozinho.
+um bot de discord com algumas funcionalidades e também tem integração com o minecraft, este bot foi desenvolvido inicialmente para um servidor, porem como foi um bot gratuito tomei a liberade de pedir ao boto para colocar em meu github pelo fato de eu ter desenvolvido o mesmo totalmente sozinho.
 
 ##Imagens
 
@@ -17,7 +17,7 @@
 
 #####CPU
 
-![Screenshot4](imgs/screenshot_4.png)
+![Screenshot4](imgs/screenshot_5.png)
 
 ####Sistema de ticket
 
