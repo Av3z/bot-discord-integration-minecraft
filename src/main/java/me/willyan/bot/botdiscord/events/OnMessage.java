@@ -2,6 +2,7 @@ package me.willyan.bot.botdiscord.events;
 
 import me.willyan.bot.botdiscord.commands.*;
 import me.willyan.bot.botdiscord.lib.ConfigManager;
+import me.willyan.bot.botdiscord.util.Embed;
 import me.willyan.bot.botdiscord.util.IMessage;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.*;
@@ -23,6 +24,27 @@ public class OnMessage extends ListenerAdapter {
         boolean adm = Objects.requireNonNull(e.getMember()).hasPermission(Permission.ADMINISTRATOR);
         Guild guild = e.getGuild();
         Member member = e.getMember();
+
+
+
+
+        if (args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "captcha")){
+            IMessage.delete(e);
+
+            if (bot) return;
+
+            if(adm){
+                TextChannel textChannel = e.getGuild().getTextChannelById(ConfigManager.get("captcha.channel"));
+
+                textChannel.sendMessage(Embed.create("Sistema de Segurança",
+                        "Por favor siga os passos para ser redirecionado para o discord, " +
+                                "no momento você está em uma aba que mantem o nosso discord seguro contra bots.",
+                        "Como concluir a etapa de segurança ?", "Para concluir o passo de verificação basta apenas clicar no emoji abaixo ✅")).complete().addReaction("✅").queue();
+                return;
+            }
+
+            IMessage.send(e, ConfigManager.get("noPerm", "<user>", author));
+        }
 
 
         if (args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "say") || args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "falar") || args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "falar")) {

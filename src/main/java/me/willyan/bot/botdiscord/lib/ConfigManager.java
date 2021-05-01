@@ -4,8 +4,6 @@ import me.willyan.bot.botdiscord.core.Main;
 
 public class ConfigManager {
 
-    public static final String TOKEN = "NzM4NjI0MTI0NjA3NTI5MDAw.XyOnUg.GL-_UskaD7kGEjkuwP5cvfysgO4";
-
     public static String get(String path){
         return Main.getPlugin(Main.class).getConfig().getString("bot."+path);
     }

@@ -16,6 +16,7 @@ public final class Main extends JavaPlugin {
         console = Bukkit.getServer().getConsoleSender();
         new BotDiscord(this);
         saveDefaultConfig();
+        reloadConfig();
         console.sendMessage(ConfigManager.get("onEnable"));
 
     }

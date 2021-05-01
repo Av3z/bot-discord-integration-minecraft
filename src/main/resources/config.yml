@@ -5,7 +5,19 @@
 # Segue abaixo as configurações do bot!
 bot:
 
-  # Aqui você escolhe o prefixo que vai querer exemplo : !say teste           / #say Olá isso é um teste
+  #coloque o id do cargo que de membros, que irá ser dado ao entrar e/ou aceitar o captcha security.
+  memberRoleId: '837772561545691188'
+
+  #Aqui estão todas as configurações referente ao sistema de captcha do bot.
+  captcha:
+    message: '> teste clique aqui para aceitar o captcha. e concluir o passo de seguranca do discord.'
+    category: '837768568606425209'
+    channel: '837798636334481428'
+
+  # Por favor coloque aqui o token do seu bot para ele funcionar.
+  token: ''
+
+  # Aqui você escolhe o prefixo que vai querer exemplo : !say teste    / #say Olá isso é um teste
   prefix: '!'
 
   # > Coloque aqui a mensagem que ir aparecer como jogando
