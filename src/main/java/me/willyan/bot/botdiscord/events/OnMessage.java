@@ -9,11 +9,16 @@ import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+import java.lang.management.ManagementFactory;
+import java.text.DecimalFormat;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Objects;
 
 public class OnMessage extends ListenerAdapter {
+
+    private static final com.sun.management.OperatingSystemMXBean OS_BEAN =
+            (com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
 
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
 
@@ -26,6 +31,34 @@ public class OnMessage extends ListenerAdapter {
         Member member = e.getMember();
 
 
+
+        if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "host")){
+
+            long total, free, used;
+            double cpu;
+
+            cpu = OS_BEAN.getSystemCpuLoad() * 100;
+
+            total = OS_BEAN.getTotalPhysicalMemorySize();
+            free = OS_BEAN.getFreePhysicalMemorySize();
+            used = total - free;
+
+            int mb = 1024*1024;
+
+            DecimalFormat doubleFormatted = new DecimalFormat("#.##");
+            String resultCpu = doubleFormatted.format(cpu);
+
+            if(args[1].equalsIgnoreCase("used")){
+                e.getChannel().sendMessage("Sua host está usando: " + used / mb  + " / MB").queue();
+            }else if(args[1].equalsIgnoreCase("total")){
+                e.getChannel().sendMessage("Sua host tem: " + total / mb  + " / MB total!").queue();
+            } else if(args[1].equalsIgnoreCase("free")){
+                e.getChannel().sendMessage("Sua host tem: " + free / mb  + " / MB livre!").queue();
+            } else if(args[1].equalsIgnoreCase("cpu")) {
+                e.getChannel().sendMessage("A CPU da sua host está usando: " + resultCpu  + "%").queue();
+            }
+
+        }
 
 
         if (args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "captcha")){
