@@ -15,6 +15,7 @@ public class OsManager {
     private static int mb = 1024*1024;
 
 
+
     public static String getMemory(){
         total = OS_BEAN.getTotalPhysicalMemorySize();
         free = OS_BEAN.getFreePhysicalMemorySize();

@@ -1,4 +1,4 @@
-# V 1.0.7 Bot desenvolvido por Av3z#0694 para mais informações
+# V 1.0.8 Bot desenvolvido por Av3z#0694 para mais informações
 # Este bot foi desenvolvido exclusivamente para o servidor CookieMC
 # Este bot está sobe a licensa GNU para mais informações github.com/av3z/bot-cookie-mc
 
@@ -83,6 +83,10 @@ bot:
 
   # Mensagem que ira aparecer caso o usuario não tenha nenhum ticket aberto no momento e está tentando deletar.
   # a tag <user> representa o usuario exemplo @Av3z
+
+  # Aqui você coloca o ID do canal que você quer que seja responsavel pela abertura dos tickets
+  ticketId: '834612833794129950'
+
   noTickets: '> <user> Você nao tem nenhum ticket aberto!'
 
   # Mensagem que o usuario irá receber no chat privado quando resolver o ticket. a tag <user> representa o usuario exemplo @Av3z

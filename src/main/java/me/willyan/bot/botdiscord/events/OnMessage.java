@@ -17,7 +17,6 @@ import java.util.Objects;
 public class OnMessage extends ListenerAdapter {
 
 
-
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
 
         String[] args = e.getMessage().getContentRaw().split(" ");
@@ -29,33 +28,37 @@ public class OnMessage extends ListenerAdapter {
         Member member = e.getMember();
 
 
+
         if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "host")){
 
-            if(args.length == 3){
-                int seconds = Integer.parseInt(args[2]);
+            if(adm){
+                if(args.length == 3){
+                    int seconds = Integer.parseInt(args[2]);
 
-                if(args[1].equalsIgnoreCase("memory")){
-                    for(int i = 0; i < seconds; i++){
-                        e.getChannel().sendMessage("Sua host está usando: **" + OsManager.getMemory() + "** MBs").queue();
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException interruptedException) {
-                            interruptedException.printStackTrace();
+                    if(args[1].equalsIgnoreCase("memory")){
+                        for(int i = 0; i < seconds; i++){
+                            e.getChannel().sendMessage("Sua host está usando: **" + OsManager.getMemory() + "** MBs").queue();
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException interruptedException) {
+                                interruptedException.printStackTrace();
+                            }
+                        }
+                    } else if(args[1].equalsIgnoreCase("cpu")) {
+                        for(int i = 0; i < seconds; i++){
+                            e.getChannel().sendMessage("A CPU da sua host está usando: **" + OsManager.getCpu()  + "**%").queue();
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException interruptedException) {
+                                interruptedException.printStackTrace();
+                            }
                         }
                     }
-                } else if(args[1].equalsIgnoreCase("cpu")) {
-                    for(int i = 0; i < seconds; i++){
-                        e.getChannel().sendMessage("A CPU da sua host está usando: **" + OsManager.getCpu()  + "**%").queue();
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException interruptedException) {
-                            interruptedException.printStackTrace();
-                        }
-                    }
+                } else {
+                    IMessage.send(e, "> Por favor use "+ConfigManager.get("prefix")+"host <cpu / memory> <tempo>");
                 }
-            } else {
-                IMessage.send(e, "> Por favor use "+ConfigManager.get("prefix")+"host <cpu / memory> <tempo>");
             }
+
         }
 
 
@@ -234,49 +237,22 @@ public class OnMessage extends ListenerAdapter {
 
             if (args[1].equalsIgnoreCase("create") || args[1].equalsIgnoreCase("criar")) {
 
-                for (TextChannel tChannel : guild.getTextChannels()) {
-                    if (tChannel.getName().equalsIgnoreCase("ticket-" + member.getId())) {
-                        IMessage.send(e, "" + ConfigManager.get("ticketIsOpened", "<user>", member.getAsMention()));
-                        return;
-                    }
-                }
-
-                Category category = guild.getCategoryById(ConfigManager.get("category"));
-
-                TextChannel textChannel = guild.createTextChannel("ticket-" + member.getId(), category)
-                        .addPermissionOverride(member, EnumSet.of(Permission.VIEW_CHANNEL, Permission.MESSAGE_WRITE, Permission.MESSAGE_READ, Permission.MESSAGE_HISTORY, Permission.MESSAGE_EMBED_LINKS, Permission.MESSAGE_ATTACH_FILES, Permission.MESSAGE_ADD_REACTION, Permission.MESSAGE_EXT_EMOJI), null)
-                        .addPermissionOverride(guild.getPublicRole(), null, EnumSet.of(Permission.VIEW_CHANNEL))
-                        .addPermissionOverride(Objects.requireNonNull(guild.getRoleById(ConfigManager.get("idRoleSuporte"))), EnumSet.of(Permission.VIEW_CHANNEL, Permission.MESSAGE_WRITE, Permission.MESSAGE_READ, Permission.MESSAGE_HISTORY, Permission.MESSAGE_EMBED_LINKS, Permission.MESSAGE_ATTACH_FILES, Permission.MESSAGE_ADD_REACTION, Permission.MESSAGE_EXT_EMOJI), null)
-                        .complete();
-
-                textChannel.sendMessage("" + ConfigManager.get("ticketSuccess", "<user>", member.getAsMention())).queue();
-                textChannel.sendMessage("" + ConfigManager.get("ticketSuccess2", "<suporte>" , Objects.requireNonNull(guild.getRoleById(ConfigManager.get("idRoleSuporte"))).getAsMention())).queue();
-                textChannel.sendMessage("" + ConfigManager.getWithPrefix("ticketSuccess3")).queue();
+                TextChannel channel = e.getGuild().getTextChannelById(ConfigManager.get("ticketId"));
+                channel.sendMessage(Embed.create("Sistema de Atendimento", "Este canal é reservado para os tickets, caso queira tirar alguma duvida, ou resolver algum problema clique no emoji abaixo 🔓")).complete().addReaction("🔓").queue();
 
             }
 
-            if (args[1].equalsIgnoreCase("ok")) {
-
-                List<TextChannel> ticket = guild.getTextChannelsByName("ticket-"+member.getId(), true);
-
-                if(ticket.size() > 0){
-                    member.getUser().openPrivateChannel().queue(channel ->
-                            channel.sendMessage("" + ConfigManager.get("ticketSolved", "<user>", author)).queue());
-
-                    ticket.get(0).delete().queue();
-                } else {
-                    IMessage.send(e, "" + ConfigManager.get("noTickets", "<user>", member.getAsMention()));
-                }
-
-            }
 
         }
 
         if (args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "ping")) {
+
             e.getJDA().getRestPing().queue(
                     (ping) -> e.getChannel()
                     .sendMessageFormat("> " + author + " Você está com %s **ms**", ping).queue()
             );
+
+
         }
 
     }
