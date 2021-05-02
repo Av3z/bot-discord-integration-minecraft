@@ -85,7 +85,9 @@ bot:
   # a tag <user> representa o usuario exemplo @Av3z
 
   # Aqui você coloca o ID do canal que você quer que seja responsavel pela abertura dos tickets
-  ticketId: '834612833794129950'
+  ticketId: '818456937288040499'
+
+  ticketCategoryId: '751906455363518565'
 
   noTickets: '> <user> Você nao tem nenhum ticket aberto!'
 

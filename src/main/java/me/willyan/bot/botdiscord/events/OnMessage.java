@@ -235,11 +235,13 @@ public class OnMessage extends ListenerAdapter {
             if (bot) return;
 
 
-            if (args[1].equalsIgnoreCase("create") || args[1].equalsIgnoreCase("criar")) {
+            if(adm){
+                if (args[1].equalsIgnoreCase("create") || args[1].equalsIgnoreCase("criar")) {
 
-                TextChannel channel = e.getGuild().getTextChannelById(ConfigManager.get("ticketId"));
-                channel.sendMessage(Embed.create("Sistema de Atendimento", "Este canal é reservado para os tickets, caso queira tirar alguma duvida, ou resolver algum problema clique no emoji abaixo 🔓")).complete().addReaction("🔓").queue();
+                    TextChannel channel = e.getGuild().getTextChannelById(ConfigManager.get("ticketId"));
+                    channel.sendMessage(Embed.create("Sistema de Atendimento", "Este canal é reservado para os tickets, caso queira tirar alguma duvida, ou resolver algum problema clique no emoji abaixo 🔓")).complete().addReaction("🔓").queue();
 
+                }
             }
 
 
