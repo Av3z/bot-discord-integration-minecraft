@@ -6,11 +6,13 @@ import me.willyan.bot.botdiscord.lib.OsManager;
 import me.willyan.bot.botdiscord.util.Embed;
 import me.willyan.bot.botdiscord.util.IMessage;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-import java.util.EnumSet;
 import java.util.List;
 import java.util.Objects;
 
@@ -256,6 +258,7 @@ public class OnMessage extends ListenerAdapter {
 
 
         }
+
 
     }
 }

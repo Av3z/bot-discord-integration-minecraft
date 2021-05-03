@@ -49,6 +49,8 @@ public class OnReaction extends ListenerAdapter {
 
             if(reaction.getName().equalsIgnoreCase("🔓")){
 
+                e.getReaction().removeReaction(e.getUser()).queue();
+
                 if(map.containsKey(e.getMember().getId()))return;
 
                 TextChannel channel = e.getGuild().createTextChannel("ticket-" + random, category)
@@ -61,7 +63,6 @@ public class OnReaction extends ListenerAdapter {
 
                 channel.sendMessage(Embed.create("Sistema de Atendimento", e.getMember().getAsMention() + " Seu ticket foi criado com sucesso aguarde alguém da equipe de suporte para lhe ajudar. ", "Sua duvida ou ticket foi resolvido?", "Então clique no emoji abaixo para fechar o seu ticket! 🔒")).complete().addReaction("🔒").queue();
 
-                e.getReaction().removeReaction().queue();
             }
 
         }

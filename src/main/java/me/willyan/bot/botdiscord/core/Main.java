@@ -12,13 +12,11 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-
         console = Bukkit.getServer().getConsoleSender();
         new BotDiscord(this);
         saveDefaultConfig();
         reloadConfig();
         console.sendMessage(ConfigManager.get("onEnable"));
-
     }
 
     @Override
