@@ -4,9 +4,9 @@
 
 um bot de discord com algumas funcionalidades e também tem integração com o minecraft, este bot foi desenvolvido inicialmente para um servidor, porem como foi um bot gratuito tomei a liberade de pedir ao boto para colocar em meu github pelo fato de eu ter desenvolvido o mesmo totalmente sozinho.
 
-##Imagens
+## Imagens
 
-####Sistema de Segurança!
+#### Sistema de Segurança!
 
 
 ![Screenshot](imgs/screenshot_1.png)
