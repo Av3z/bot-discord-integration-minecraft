@@ -51,7 +51,10 @@ public class OnReaction extends ListenerAdapter {
 
                 e.getReaction().removeReaction(e.getUser()).queue();
 
-                if(map.containsKey(e.getMember().getId()))return;
+                if(map.containsKey(e.getMember().getId())){
+                    e.getMember().getUser().openPrivateChannel().complete().sendMessage("> **" +e.getMember().getAsMention() + "** você já tem um ticket em aberto!").queue();
+                    return;
+                }
 
                 TextChannel channel = e.getGuild().createTextChannel("ticket-" + random, category)
                         .addPermissionOverride(e.getGuild().getPublicRole(), null, EnumSet.of(Permission.VIEW_CHANNEL))
