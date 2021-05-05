@@ -30,6 +30,17 @@ public class OnMessage extends ListenerAdapter {
         Member member = e.getMember();
 
 
+        if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "cargos") || args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "roles") ){
+            String resultRoles = "";
+            for(int i = 0; i < e.getGuild().getRoles().size(); i++){
+                    resultRoles += "[" + e.getGuild().getRoles().get(i).getName() + "] ";
+
+            }
+
+
+            e.getChannel().sendMessage(Embed.create("Cargos do Servidor", "Os cargos são: " + resultRoles)).queue();
+
+        }
 
         if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "host")){
 
