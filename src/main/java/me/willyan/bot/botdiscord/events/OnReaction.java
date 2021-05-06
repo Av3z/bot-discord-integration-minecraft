@@ -32,7 +32,7 @@ public class OnReaction extends ListenerAdapter {
             }
         }
 
-        if(e.getTextChannel().getName().startsWith("ticket-")){
+        if(e.getTextChannel().getName().startsWith(ConfigManager.get("ticketName"))){
 
             if(reaction.getName().equalsIgnoreCase("🔒")){
                 e.getTextChannel().delete().queue();
@@ -56,7 +56,7 @@ public class OnReaction extends ListenerAdapter {
                     return;
                 }
 
-                TextChannel channel = e.getGuild().createTextChannel("ticket-" + random, category)
+                TextChannel channel = e.getGuild().createTextChannel(ConfigManager.get("ticketName") + random, category)
                         .addPermissionOverride(e.getGuild().getPublicRole(), null, EnumSet.of(Permission.VIEW_CHANNEL))
                         .addPermissionOverride(e.getMember(), EnumSet.of(Permission.VIEW_CHANNEL, Permission.MESSAGE_EXT_EMOJI, Permission.MESSAGE_READ, Permission.MESSAGE_ADD_REACTION, Permission.MESSAGE_WRITE), null)
                         .addPermissionOverride(e.getGuild().getRoleById(ConfigManager.get("idRoleSuporte")), EnumSet.of(Permission.VIEW_CHANNEL, Permission.MESSAGE_EXT_EMOJI, Permission.MESSAGE_READ, Permission.MESSAGE_ADD_REACTION, Permission.MESSAGE_WRITE), null)

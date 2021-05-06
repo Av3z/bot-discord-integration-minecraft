@@ -26,8 +26,6 @@ public class OnMessage extends ListenerAdapter {
         String author = e.getMessage().getAuthor().getAsMention();
         boolean bot = e.getMessage().getAuthor().isBot();
         boolean adm = Objects.requireNonNull(e.getMember()).hasPermission(Permission.ADMINISTRATOR);
-        Guild guild = e.getGuild();
-        Member member = e.getMember();
 
 
         if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "cargos") || args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "roles") ){
@@ -36,7 +34,6 @@ public class OnMessage extends ListenerAdapter {
                     resultRoles += "[" + e.getGuild().getRoles().get(i).getName() + "] ";
 
             }
-
 
             e.getChannel().sendMessage(Embed.create("Cargos do Servidor", "Os cargos são: " + resultRoles)).queue();
 

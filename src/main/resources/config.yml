@@ -1,4 +1,4 @@
-# V 1.0.8 Bot desenvolvido por Av3z#0694 para mais informações
+# V 1.0.9 Bot desenvolvido por Av3z#0694 para mais informações
 # Este bot está sobe a licensa GNU
 
 # Segue abaixo as configurações do bot!
@@ -84,9 +84,11 @@ bot:
   # a tag <user> representa o usuario exemplo @Av3z
 
   # Aqui você coloca o ID do canal que você quer que seja responsavel pela abertura dos tickets
-  ticketId: '818456937288040499'
+  ticketId: '834612833794129950'
 
-  ticketCategoryId: '751906455363518565'
+  ticketName: 'ticketcookie-'
+
+  ticketCategoryId: '834614398583963669'
 
   noTickets: '> <user> Você nao tem nenhum ticket aberto!'
 
