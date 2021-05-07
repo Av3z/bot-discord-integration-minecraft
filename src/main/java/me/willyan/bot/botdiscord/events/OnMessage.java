@@ -13,7 +13,9 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class OnMessage extends ListenerAdapter {
@@ -23,10 +25,36 @@ public class OnMessage extends ListenerAdapter {
 
         String[] args = e.getMessage().getContentRaw().split(" ");
         String[] arg = e.getMessage().getContentRaw().split("-");
+        String[] splited = e.getMessage().getContentRaw().split(" !");
         String author = e.getMessage().getAuthor().getAsMention();
         boolean bot = e.getMessage().getAuthor().isBot();
         boolean adm = Objects.requireNonNull(e.getMember()).hasPermission(Permission.ADMINISTRATOR);
 
+        Map<String, String> map = new HashMap<>();
+
+        String perguntaAtiva = "";
+
+        if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "e")){
+            if(bot) return;
+            if (adm){
+
+                perguntaAtiva = splited[1].toLowerCase();
+                String resposta = splited[2].toLowerCase();
+
+                map.put(perguntaAtiva, resposta);
+                IMessage.send(e, "> Evento QUIZ iniciado para participar digite !resposta !<resposta>");
+                IMessage.send(e, "> A pergunta é: " + perguntaAtiva);
+                return;
+            }
+
+        }
+
+        if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "resp")){
+            if (splited[0].equalsIgnoreCase(map.get(perguntaAtiva))){
+                if(map.get(perguntaAtiva).isEmpty())return;
+                IMessage.send(e, "O ganhador foi: " + e.getMessage().getAuthor().getAsMention() + " a resposta era : " + splited[0].toLowerCase());
+            }
+        }
 
         if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "cargos") || args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "roles") ){
             String resultRoles = "";
