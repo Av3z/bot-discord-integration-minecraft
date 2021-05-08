@@ -31,6 +31,10 @@ public class OnMessage extends ListenerAdapter {
 
         String perguntaAtiva = "";
 
+        if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "membros")){
+            IMessage.send(e, "> O discord tem um total de **" + e.getGuild().getMemberCount() + "**");
+        }
+
         if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "sorteio")){
             int rand = new Random().nextInt(e.getGuild().getMemberCount());
             String winner = e.getGuild().getMembers().get(rand).getAsMention();
