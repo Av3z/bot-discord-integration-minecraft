@@ -13,10 +13,7 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class OnMessage extends ListenerAdapter {
 
@@ -33,6 +30,12 @@ public class OnMessage extends ListenerAdapter {
         Map<String, String> map = new HashMap<>();
 
         String perguntaAtiva = "";
+
+        if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "sorteio")){
+            int rand = new Random().nextInt(e.getGuild().getMemberCount());
+            String winner = e.getGuild().getMembers().get(rand).getAsMention();
+            IMessage.send(e, "> O usuario ganhador do sorteio foi: " + winner);
+        }
 
         if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "e")){
             if(bot) return;
