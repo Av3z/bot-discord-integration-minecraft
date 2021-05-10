@@ -31,6 +31,17 @@ public class OnMessage extends ListenerAdapter {
 
         String perguntaAtiva = "";
 
+        if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "ban") || args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "banir")){
+            IMessage.delete(e);
+            if (bot) return;
+            if (adm){
+                String uid = args[1].replace("<@!" , "").replace(">", "");
+                int delay = Integer.parseInt(args[2]);
+                e.getGuild().ban(uid, delay).queue();
+                e.getChannel().sendMessage(Embed.create("Banimentos", "o usuario "+ args[1] +" foi banido por " + args[2] + " dias")).queue();
+            }
+        }
+
         if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "membros")){
             IMessage.send(e, "> O discord tem um total de **" + e.getGuild().getMemberCount() + "**");
         }
