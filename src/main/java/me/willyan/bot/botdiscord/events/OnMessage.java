@@ -42,6 +42,16 @@ public class OnMessage extends ListenerAdapter {
             }
         }
 
+        if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "kick")){
+            IMessage.delete(e);
+            if (bot) return;
+            if (adm){
+                String uid = args[1].replace("<@!" , "").replace(">", "");
+                e.getGuild().kick(uid).queue();
+                e.getChannel().sendMessage(Embed.create("Kick", "o usuario "+ args[1] +" foi kickado! ")).queue();
+            }
+        }
+
         if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "membros")){
             IMessage.send(e, "> O discord tem um total de **" + e.getGuild().getMemberCount() + "**");
         }
