@@ -6,10 +6,7 @@ import me.willyan.bot.botdiscord.lib.OsManager;
 import me.willyan.bot.botdiscord.util.Embed;
 import me.willyan.bot.botdiscord.util.IMessage;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -30,6 +27,22 @@ public class OnMessage extends ListenerAdapter {
         Map<String, String> map = new HashMap<>();
 
         String perguntaAtiva = "";
+
+        if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "mute")){
+            if (bot) return;
+            if (adm){
+                String uid = args[1].replace("<@!" , "").replace(">", "");
+                Role role = e.getGuild().getRoleById("841380088858542080");
+                if(uid != null){
+                    e.getGuild().addRoleToMember(uid, role).queue();
+                    e.getChannel().sendMessage("Jogador " + args[1] + " foi mutado").queue();
+                }else {
+                    IMessage.send(e, "> O membro não foi encontrado");
+                }
+
+            }
+
+        }
 
         if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "ban") || args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "banir")){
             IMessage.delete(e);
