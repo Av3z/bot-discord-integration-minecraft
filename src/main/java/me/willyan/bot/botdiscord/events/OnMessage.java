@@ -44,6 +44,22 @@ public class OnMessage extends ListenerAdapter {
 
         }
 
+        if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "unmute")){
+            if (bot) return;
+            if (adm){
+                String uid = args[1].replace("<@!" , "").replace(">", "");
+                Role role = e.getGuild().getRoleById("841380088858542080");
+                if(uid != null){
+                    e.getGuild().removeRoleFromMember(uid, role).queue();
+                    e.getChannel().sendMessage("Jogador " + args[1] + " foi desmutado").queue();
+                }else {
+                    IMessage.send(e, "> O membro não foi encontrado");
+                }
+
+            }
+
+        }
+
         if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "ban") || args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "banir")){
             IMessage.delete(e);
             if (bot) return;
