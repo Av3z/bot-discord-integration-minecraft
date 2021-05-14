@@ -17,6 +17,7 @@ public class OnMessage extends ListenerAdapter {
 
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
 
+        String allMsg = e.getMessage().getContentRaw();
         String[] args = e.getMessage().getContentRaw().split(" ");
         String[] arg = e.getMessage().getContentRaw().split("-");
         String[] splited = e.getMessage().getContentRaw().split(" !");
@@ -27,6 +28,22 @@ public class OnMessage extends ListenerAdapter {
         Map<String, String> map = new HashMap<>();
 
         String perguntaAtiva = "";
+
+        if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "anc")){
+            IMessage.delete(e);
+            if (bot) return;
+            if (adm){
+                if (args.length > 2){
+                    for(int i = 0; i < e.getGuild().getMembers().size(); i++){
+                        if (e.getGuild().getMembers().get(i).getUser().isBot()){
+                            continue;
+                        }
+                        e.getGuild().getMembers().get(i).getUser().openPrivateChannel().complete().sendMessage("> " + e.getMember().getAsMention() + " Você tem uma nova mensagem do servidor!").queue();
+                        e.getGuild().getMembers().get(i).getUser().openPrivateChannel().complete().sendMessage(e.getMessage().getContentRaw().replace(ConfigManager.get("prefix") + "anc", "")).queue();
+                    }
+                }
+            }
+        }
 
         if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "i")){
             if (bot) return;
