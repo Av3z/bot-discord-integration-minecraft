@@ -28,6 +28,13 @@ public class OnMessage extends ListenerAdapter {
 
         String perguntaAtiva = "";
 
+        if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "i")){
+            if (bot) return;
+            String invite = e.getChannel().createInvite().complete().toString().replace("Invite(", "").replace(")", "");
+            IMessage.send(e, "> " + e.getMember().getUser().getAsMention() + " ** Aqui seu codigo de convite ** https://discord.gg/" + invite);
+
+        }
+
         if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "mute")){
             if (bot) return;
             if (adm){
