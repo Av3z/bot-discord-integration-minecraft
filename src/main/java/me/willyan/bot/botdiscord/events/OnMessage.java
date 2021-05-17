@@ -29,6 +29,14 @@ public class OnMessage extends ListenerAdapter {
 
         String perguntaAtiva = "";
 
+        if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "roll")){
+            if (bot) return;
+
+            int random = new Random().nextInt(6);
+
+            IMessage.send(e, "> " + e.getAuthor().getAsMention() + " seu dado rolou e caiu " + random);
+        }
+
         if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "anc")){
             IMessage.delete(e);
             if (bot) return;
