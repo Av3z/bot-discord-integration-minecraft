@@ -17,7 +17,6 @@ public class OnMessage extends ListenerAdapter {
 
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {
 
-        String allMsg = e.getMessage().getContentRaw();
         String[] args = e.getMessage().getContentRaw().split(" ");
         String[] arg = e.getMessage().getContentRaw().split("-");
         String[] splited = e.getMessage().getContentRaw().split(" !");
@@ -28,6 +27,20 @@ public class OnMessage extends ListenerAdapter {
         Map<String, String> map = new HashMap<>();
 
         String perguntaAtiva = "";
+
+        if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "add")){
+            if (bot) return;
+
+            if (adm){
+                String idRole = args[1].replace("<@&", "").replace(">", "");
+                String uid = args[2].replace("<@!", "").replace(">", "");
+                Role role = e.getGuild().getRoleById(idRole);
+                e.getGuild().addRoleToMember(uid, role).queue();
+
+                e.getChannel().sendMessage(Embed.create("Cargos", "O administrador " + e.getAuthor().getAsMention() + " Adicionou o cargo " + args[1] + " para o usuário " + args[2])).queue();
+            }
+
+        }
 
         if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "roll")){
             if (bot) return;
