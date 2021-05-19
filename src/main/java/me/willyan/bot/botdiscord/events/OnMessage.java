@@ -28,6 +28,20 @@ public class OnMessage extends ListenerAdapter {
 
         String perguntaAtiva = "";
 
+        if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "rm")){
+            if (bot) return;
+
+            if (adm) {
+                String idRole = args[1].replace("<@&", "").replace(">", "");
+                String uid = args[2].replace("<@!", "").replace(">", "");
+                Role role = e.getGuild().getRoleById(idRole);
+                e.getGuild().removeRoleFromMember(uid, role).queue();
+
+                e.getChannel().sendMessage(Embed.create("Cargos", "O administrador " + e.getAuthor().getAsMention() + " Removeu o cargo " + args[1] + " do usuário " + args[2])).queue();
+
+            }
+        }
+
         if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "add")){
             if (bot) return;
 
