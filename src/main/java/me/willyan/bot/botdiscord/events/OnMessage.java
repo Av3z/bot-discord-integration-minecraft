@@ -46,10 +46,23 @@ public class OnMessage extends ListenerAdapter {
             if (bot) return;
 
             if (adm){
+
                 String idRole = args[1].replace("<@&", "").replace(">", "");
                 String uid = args[2].replace("<@!", "").replace(">", "");
+
+                List<Role> roles = e.getGuild().getMemberById(uid).getRoles();
+                for(int i = 0; i < roles.size(); i++){
+                    if(roles.get(i).getId() == idRole){
+                        e.getChannel().sendMessage(Embed.create("Cargos", "" + e.getAuthor().getAsMention() + " O usuário " + args[2] + " já tem o cargo " + args[1])).queue();
+                        return;
+                    }
+                }
+
+
                 Role role = e.getGuild().getRoleById(idRole);
                 e.getGuild().addRoleToMember(uid, role).queue();
+
+
 
                 e.getChannel().sendMessage(Embed.create("Cargos", "O administrador " + e.getAuthor().getAsMention() + " Adicionou o cargo " + args[1] + " para o usuário " + args[2])).queue();
             }
