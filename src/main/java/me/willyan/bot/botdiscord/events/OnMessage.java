@@ -160,7 +160,7 @@ public class OnMessage extends ListenerAdapter {
         if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "sorteio")){
             int rand = new Random().nextInt(e.getGuild().getMemberCount());
             String winner = e.getGuild().getMembers().get(rand).getAsMention();
-            IMessage.send(e, "> O usuario ganhador do sorteio foi: " + winner);
+            e.getChannel().sendMessage(Embed.create("Sorteio", "O usuário ganhador do sorteio foi: " + winner )).queue();
         }
 
         if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "e")){
