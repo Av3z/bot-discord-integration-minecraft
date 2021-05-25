@@ -140,6 +140,7 @@ public class OnMessage extends ListenerAdapter {
                 int delay = Integer.parseInt(args[2]);
                 e.getGuild().ban(uid, delay).queue();
                 e.getChannel().sendMessage(Embed.create("Banimentos", "o usuario "+ args[1] +" foi banido por " + args[2] + " dias")).queue();
+                e.getGuild().getMemberById(uid).getUser().openPrivateChannel().complete().sendMessage("Você foi banido do servidor " + e.getGuild().getName() + " por " + e.getAuthor().getName()).queue();
             }
         }
 
