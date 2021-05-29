@@ -73,8 +73,14 @@ public class OnMessage extends ListenerAdapter {
             if (bot) return;
 
             int random = new Random().nextInt(6);
+            e.getChannel().sendMessage("> " + e.getAuthor().getAsMention() + " rolando o seu dado aguarde...").queue();
+            try {
+                Thread.sleep(1000);
+                IMessage.send(e, "> " + e.getAuthor().getAsMention() + " seu dado rolou e caiu " + random);
+            } catch (InterruptedException interruptedException) {
+                interruptedException.printStackTrace();
+            }
 
-            IMessage.send(e, "> " + e.getAuthor().getAsMention() + " seu dado rolou e caiu " + random);
         }
 
         if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "anc")){
