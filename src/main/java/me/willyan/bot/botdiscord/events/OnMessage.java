@@ -28,6 +28,18 @@ public class OnMessage extends ListenerAdapter {
 
         String perguntaAtiva = "";
 
+        if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "fechar") || arg[0].equalsIgnoreCase(ConfigManager.get("prefix") + "close")){
+            if (adm){
+                if (e.getChannel().getName().startsWith("ticket")){
+                    e.getChannel().delete().queue();
+                } else {
+                    IMessage.send(e,"> Você deve fechar o ticket no chat do mesmo!");
+                }
+            } else{
+                IMessage.send(e, "> Comando apenas para ADMS");
+            }
+        }
+
         if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "rm")){
             if (bot) return;
 
