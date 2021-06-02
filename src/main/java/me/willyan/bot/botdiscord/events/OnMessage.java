@@ -199,8 +199,12 @@ public class OnMessage extends ListenerAdapter {
 
         if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "resp")){
             if (splited[0].equalsIgnoreCase(map.get(perguntaAtiva))){
-                if(map.get(perguntaAtiva).isEmpty())return;
+                if(map.get(perguntaAtiva).isEmpty()){
+                    IMessage.send(e, "> O evento já teve um vencedor;");
+                    return;
+                }
                 IMessage.send(e, "O ganhador foi: " + e.getMessage().getAuthor().getAsMention() + " a resposta era : " + splited[0].toLowerCase());
+                map.put("","");
             }
         }
 
