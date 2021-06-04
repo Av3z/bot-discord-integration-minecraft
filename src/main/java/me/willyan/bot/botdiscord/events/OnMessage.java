@@ -411,7 +411,7 @@ public class OnMessage extends ListenerAdapter {
                     int total = Integer.parseInt(args[1]);
                     List<Message> messages = e.getChannel().getHistory().retrievePast(total).complete();
                     e.getChannel().deleteMessages(messages).queue();
-                    IMessage.send(e, "> **Chat Limpo por:** " + author);
+                    e.getChannel().sendMessage(Embed.create("Server", "Chat limpo com sucesso por " + author, " Mensagens apagadas: ", "" + messages.size())).queue();
                 } else {
                     IMessage.send(e, ConfigManager.get("useClear"));
                 }
