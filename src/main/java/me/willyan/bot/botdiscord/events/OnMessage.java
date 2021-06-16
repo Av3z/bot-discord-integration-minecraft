@@ -37,18 +37,14 @@ public class OnMessage extends ListenerAdapter {
 
         if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "fechar") || arg[0].equalsIgnoreCase(ConfigManager.get("prefix") + "close")){
             String[] name = e.getChannel().getName().split("-");
-            String uid = name[1];
-            if (adm){
-                if (e.getChannel().getName().startsWith("ticket")){
+            String nameResult = name[0]+"-";
+                if (nameResult.equalsIgnoreCase(ConfigManager.get("ticketName"))){
                     e.getChannel().delete().queue();
-                    e.getGuild().getMemberById(uid).getUser().openPrivateChannel().complete().sendMessage("Seu ticket foi fechado por algum ADM, caso não tenha resolvido o ticket, abra outro ou entre em contato com algum ADM").queue();
                     e.getAuthor().openPrivateChannel().complete().sendMessage("Você fechou um ticket manualmente, caso ouve algum erro entre em contato com Av3z#0694").queue();
                 } else {
                     IMessage.send(e,"> Você deve fechar o ticket no chat do mesmo!");
                 }
-            } else{
-                IMessage.send(e, "> Comando apenas para ADMS");
-            }
+
         }
 
         if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "rm")){
