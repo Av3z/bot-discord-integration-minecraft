@@ -28,6 +28,13 @@ public class OnMessage extends ListenerAdapter {
 
         String perguntaAtiva = "";
 
+        Role muteRole = e.getGuild().getRoleById("841380088858542080");
+
+        if(e.getMember().getRoles().contains(muteRole)){
+            e.getMessage().delete().queue();
+            e.getMember().getUser().openPrivateChannel().complete().sendMessage("Você está mutado, no momento você não pode digitar no servidor!").queue();
+        }
+
         if(args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "fechar") || arg[0].equalsIgnoreCase(ConfigManager.get("prefix") + "close")){
             String[] name = e.getChannel().getName().split("-");
             String uid = name[1];
