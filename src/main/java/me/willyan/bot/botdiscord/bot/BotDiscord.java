@@ -1,9 +1,11 @@
 package me.willyan.bot.botdiscord.bot;
 
 import me.willyan.bot.botdiscord.core.Main;
+import me.willyan.bot.botdiscord.events.OnJoin;
 import me.willyan.bot.botdiscord.events.OnMessage;
 import me.willyan.bot.botdiscord.events.OnReaction;
 import me.willyan.bot.botdiscord.lib.ConfigManager;
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
@@ -25,12 +27,12 @@ public class BotDiscord {
         try {
             builder = JDABuilder.createDefault(ConfigManager.get("token"));
 
+
             builder.enableIntents(
+                    GatewayIntent.GUILD_MEMBERS,
                     GatewayIntent.GUILD_MESSAGES,
                     GatewayIntent.GUILD_MESSAGE_REACTIONS,
                     GatewayIntent.GUILD_VOICE_STATES);
-
-            builder.setActivity(Activity.playing(ConfigManager.get("playing")));
             builder.setAutoReconnect(true);
 
             builder.disableCache(
@@ -48,5 +50,6 @@ public class BotDiscord {
     public void registerEvents(){
         builder.addEventListeners(new OnMessage());
         builder.addEventListeners(new OnReaction());
+        builder.addEventListeners(new OnJoin());
     }
 }
