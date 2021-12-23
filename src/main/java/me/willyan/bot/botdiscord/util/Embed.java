@@ -8,14 +8,13 @@ import java.awt.*;
 
 public class Embed {
 
-
     public static MessageEmbed createAtt(String desc){
         EmbedBuilder embed = new EmbedBuilder();
         embed.setTitle("Anúncio");
         embed.setAuthor("CookieMC", "https://i.pinimg.com/originals/eb/78/29/eb7829e121a016db7c0e3d76af9105d2.png");
         embed.setImage("https://i.pinimg.com/originals/eb/78/29/eb7829e121a016db7c0e3d76af9105d2.png");
         embed.setDescription(desc);
-        embed.setThumbnail("https://i.pinimg.com/originals/b4/c6/0a/b4c60a5c4b34cd2e9b16bb25314e9a7e.png");
+        embed.setThumbnail("https://cdn.discordapp.com/attachments/863408986942210109/923706038543335445/LogoNovaCookie.png ");
         embed.setColor(Color.ORANGE);
         embed.setFooter(ConfigManager.get("copyRight"));
 
@@ -27,7 +26,7 @@ public class Embed {
         embed.setTitle("Icone do " + author);
         embed.setAuthor("CookieMC");
         embed.setImage(url);
-        embed.setThumbnail("https://i.pinimg.com/originals/b4/c6/0a/b4c60a5c4b34cd2e9b16bb25314e9a7e.png");
+        embed.setThumbnail("https://cdn.discordapp.com/attachments/863408986942210109/923706038543335445/LogoNovaCookie.png ");
         embed.setColor(Color.ORANGE);
         embed.setFooter(ConfigManager.get("copyRight"));
 
@@ -38,7 +37,7 @@ public class Embed {
         EmbedBuilder embed = new EmbedBuilder();
         embed.setTitle(title);
         embed.setAuthor("CookieMC");
-        embed.setThumbnail("https://i.pinimg.com/originals/b4/c6/0a/b4c60a5c4b34cd2e9b16bb25314e9a7e.png");
+        embed.setThumbnail("https://cdn.discordapp.com/attachments/863408986942210109/923706038543335445/LogoNovaCookie.png ");
         embed.setColor(Color.ORANGE);
         embed.setFooter(ConfigManager.get("copyRight"));
 
@@ -50,7 +49,7 @@ public class Embed {
         EmbedBuilder embed = new EmbedBuilder();
         embed.setTitle(title);
         embed.setAuthor("CookieMC");
-        embed.setThumbnail("https://i.pinimg.com/originals/b4/c6/0a/b4c60a5c4b34cd2e9b16bb25314e9a7e.png");
+        embed.setThumbnail("https://cdn.discordapp.com/attachments/863408986942210109/923706038543335445/LogoNovaCookie.png ");
         embed.setDescription(desc);
         embed.setColor(Color.ORANGE);
         embed.setFooter(ConfigManager.get("copyRight"));
@@ -62,7 +61,7 @@ public class Embed {
         EmbedBuilder embed = new EmbedBuilder();
         embed.setTitle(title);
         embed.setAuthor("CookieMC");
-        embed.setThumbnail("https://i.pinimg.com/originals/b4/c6/0a/b4c60a5c4b34cd2e9b16bb25314e9a7e.png");
+        embed.setThumbnail("https://cdn.discordapp.com/attachments/863408986942210109/923706038543335445/LogoNovaCookie.png ");
         embed.setColor(Color.ORANGE);
         embed.setDescription(desc);
         embed.addField(field, value, false);
