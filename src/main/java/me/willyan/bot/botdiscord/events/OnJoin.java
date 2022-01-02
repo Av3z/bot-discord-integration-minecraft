@@ -13,13 +13,13 @@ public class OnJoin extends ListenerAdapter {
     @Override
     public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent e) {
         this.count = e.getGuild().getMemberCount();
-        e.getJDA().getPresence().setActivity(Activity.playing("membros: " + getCount()));
+        e.getJDA().getPresence().setActivity(Activity.playing("Total de players: " + getCount()));
     }
 
     @Override
     public void onGuildMemberRemove(@NotNull GuildMemberRemoveEvent e) {
         this.count = e.getGuild().getMemberCount();
-        e.getJDA().getPresence().setActivity(Activity.playing("membros: " + getCount()));
+        e.getJDA().getPresence().setActivity(Activity.playing("Total de players: " + getCount()));
     }
 
     public int getCount(){
