@@ -1,8 +1,17 @@
-# V 1.1.5 Bot desenvolvido por Av3z#0694 para mais informações
+# V 1.1.6 Bot desenvolvido por Av3z#0694 para mais informações
 # Este bot está sobe a licensa GNU
 
 # Segue abaixo as configurações do bot!
 bot:
+
+  # Coloque aqui abaixo o nome do seu servidor
+  serverName: 'CookieMC'
+
+  # Coloque a logo do seu servidor
+  serverIcon: 'https://media.discordapp.net/attachments/863408986942210109/926328313935437876/logo_cu_laranja.png'
+
+  # Coloque aqui a imagem que irá aparecer na mensagem de atualizações do bot.
+  serverImageAtt: 'https://i.pinimg.com/originals/eb/78/29/eb7829e121a016db7c0e3d76af9105d2.png'
 
   #coloque o id do cargo que de membros, que irá ser dado ao entrar e/ou aceitar o captcha security.
   memberRoleId: '837772561545691188'
