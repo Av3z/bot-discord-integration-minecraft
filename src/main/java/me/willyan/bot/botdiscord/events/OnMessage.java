@@ -3,6 +3,7 @@ package me.willyan.bot.botdiscord.events;
 import me.willyan.bot.botdiscord.commands.*;
 import me.willyan.bot.botdiscord.lib.ConfigManager;
 import me.willyan.bot.botdiscord.lib.OsManager;
+import me.willyan.bot.botdiscord.util.AllArgs;
 import me.willyan.bot.botdiscord.util.Embed;
 import me.willyan.bot.botdiscord.util.IMessage;
 import net.dv8tion.jda.api.Permission;
@@ -29,6 +30,20 @@ public class OnMessage extends ListenerAdapter {
         String perguntaAtiva = "";
 
         Role muteRole = e.getGuild().getRoleById("841380088858542080");
+
+
+        if (e.getChannel().getId().equalsIgnoreCase(ConfigManager.get("channelSendIdea"))) {
+
+            if (bot) return;
+
+            String msg = AllArgs.build(0, args);
+
+            e.getJDA().getTextChannelById(ConfigManager.get("channelIdeaForADM")).sendMessage("> **Sugestão do Membro: **" + author).queue();
+            e.getJDA().getTextChannelById(ConfigManager.get("channelIdeaForADM")).sendMessage("> "+ msg).complete().addReaction("✅").queue();
+
+            IMessage.delete(e);
+
+        }
 
         if(e.getMember().getRoles().contains(muteRole)){
             e.getMessage().delete().queue();
@@ -372,21 +387,6 @@ public class OnMessage extends ListenerAdapter {
             e.getChannel().sendMessage(ConfigManager.getWithPrefix("msgPrefix")).queue();
             return;
         }
-
-        if (args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "sugerir")) {
-            IMessage.delete(e);
-
-            if (bot) return;
-
-            CommandSugerir.send(e, "**-----------------------------------------------------------**");
-            CommandSugerir.send(e, "ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ");
-            CommandSugerir.send(e, "> **Sugestão do Membro: **" + author);
-            CommandSugerir.send(e, "ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ");
-            CommandSugerir.send(e, args);
-            CommandSugerir.send(e, "ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ");
-            CommandSugerir.send(e, "**-----------------------------------------------------------**");
-        }
-
 
         if (args[0].equalsIgnoreCase(ConfigManager.get("prefix") + "form")) {
             IMessage.delete(e);

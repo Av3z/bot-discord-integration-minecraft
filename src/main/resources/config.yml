@@ -1,4 +1,4 @@
-# V 1.1.6 Bot desenvolvido por Av3z#0694 para mais informações
+# V 1.1.7 Bot desenvolvido por Av3z#0694 para mais informações
 # Este bot está sobe a licensa GNU
 
 # Segue abaixo as configurações do bot!
@@ -23,7 +23,7 @@ bot:
     channel: '837798636334481428'
 
   # Por favor coloque aqui o token do seu bot para ele funcionar.
-  token: ''
+  token: 'NzM4NjI0NTEyMTMxNzI3NDAw.XyOnrg.Qfxs-fBMTXgC260Xmh6siavu4uQ'
 
   # Aqui você escolhe o prefixo que vai querer exemplo : !say teste    / #say Olá isso é um teste
   prefix: '!'
@@ -69,8 +69,14 @@ bot:
   # Mensagem do comando prefix <prefix> significa o seu prefixo, por favor nao tire.
   msgPrefix: '> o prefix do servidor e <prefix>'
 
-  # Coloque aqui o id do canal que quer que apareça as mensagens do /sugerir
-  channelSugerir: '834897683638124676'
+  # Coloque aqui o id dos canais que você irá utilizar no sistema de sugestão... o channelSugerir é referente ao canal final.
+  # onde irá aparecer a sugestão para os jogadores. Já o channelSendIdeas será o canal onde as pessoas vão mandar as ideias.
+  # e por ultimo o ChannelIdeaForADM será o canal onde irá aparecer as ideias para os adms do servidor. para que o mesmo aprove
+  # ou não as ideias. caso tenha alguma ideia besta, poderá nem ser enviada ao canal de sugestão.
+
+  channelSugerir: '834804432125427732'
+  channelSendIdea: '834577993279733800'
+  channelIdeaForADM: '834533252739366993'
 
   # Coloque o ID da categoria que o bot ira criar os tickets;
   category: '751906455363518565'

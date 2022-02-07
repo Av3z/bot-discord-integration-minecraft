@@ -4,6 +4,7 @@ import me.willyan.bot.botdiscord.lib.ConfigManager;
 import me.willyan.bot.botdiscord.util.Embed;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Category;
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageReaction;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.react.MessageReactionAddEvent;
@@ -25,6 +26,18 @@ public class OnReaction extends ListenerAdapter {
         if (e.getMember().getUser().isBot()) return;
 
         MessageReaction.ReactionEmote reaction = e.getReaction().getReactionEmote();
+
+        if(reaction.getName().equalsIgnoreCase("✅")) {
+            if(e.getTextChannel().getId().equals(ConfigManager.get("channelIdeaForADM"))){
+
+                String msg = e.retrieveMessage().toString();
+                e.getJDA().getTextChannelById(ConfigManager.get("channelSugerir")).sendMessage("> **-----------------------------------------------**").queue();
+                e.getJDA().getTextChannelById(ConfigManager.get("channelSugerir")).sendMessage("> **Sugestão de** " + e.getMember().getAsMention()).queue();
+                e.getJDA().getTextChannelById(ConfigManager.get("channelSugerir")).sendMessage("> "+ msg).queue();
+                e.getJDA().getTextChannelById(ConfigManager.get("channelSugerir")).sendMessage("> **-----------------------------------------------**").complete().addReaction("❤").queue();
+            }
+        }
+
 
         if(reaction.getName().equalsIgnoreCase("✅")) {
             if (e.getTextChannel().getId().equals(ConfigManager.get("captcha.channel"))) {
