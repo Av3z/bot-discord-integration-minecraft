@@ -9,7 +9,7 @@ um bot de discord com algumas funcionalidades e também tem integração com o m
 #### Sistema de Segurança!
 
 
-![Screenshot](imgs/screenshot_1.png)
+![Screenshot](imgs/Screenshot_1.png)
 
 
 #### Sistema para pegar o uso de memoria e cpu da HOST!
@@ -18,13 +18,13 @@ um bot de discord com algumas funcionalidades e também tem integração com o m
 ##### Memoria
 
 
-![Screenshot2](imgs/screenshot_2.png)
+![Screenshot2](imgs/Screenshot_2.png)
 
 
 ##### CPU
 
 
-![Screenshot4](imgs/screenshot_5.png)
+![Screenshot4](imgs/Screenshot_5.png)
 
 
 #### Sistema de ticket
@@ -34,11 +34,11 @@ um bot de discord com algumas funcionalidades e também tem integração com o m
 - Ao concluirmos o ticket, onde tiver uma resposta, podemos usar !ticket ok assim o canal irá ser automaticamente excluir.
 
 
-![Screenshot5](imgs/screenshot_5.png)
+![Screenshot5](imgs/Screenshot_5.png)
 
 
 #### Aqui vai alguns comandos que podemos usar no  bot!
-![Screenshot3](imgs/screenshot_3.png)
+![Screenshot3](imgs/Screenshot_3.png)
 
 
 ### Como usar?
